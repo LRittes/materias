@@ -1,0 +1,36 @@
+create table ALUNOS (
+ 	cpf varchar(11) primary key,
+    nome varchar(255) not null,
+    digital varchar(255) not null,
+    telefone varchar(30) not null,
+    sexo char(1) not null,
+    foto varchar(255) not null,
+    dt_nascimento date not null,
+    cod_plan varchar(255),
+    altura numeric not null,
+    peso numeric not null
+)
+
+select * from alunos
+
+drop table Alunos
+
+delete from Alunos
+
+insert into alunos (cpf,nome,digital,telefone,sexo,foto,dt_nascimento,altura,peso) 
+Values ('12313','leo','asdmalsdnajcnsdh','123834','m','1283123skdmxaskl','2023-08-10',1.8,81.6)
+
+create table EMAIL (
+	cod_e serial primary key,
+	cpf varchar(11) not null,
+	email varchar not null,
+	foreign key (cpf) references alunos(cpf)
+)
+
+select * from email
+
+drop table email
+
+delete from email
+
+insert into email (cpf, email) values ('12313', 'asdasd')

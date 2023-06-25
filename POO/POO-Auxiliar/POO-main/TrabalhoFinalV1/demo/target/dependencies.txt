@@ -1,0 +1,20 @@
+digraph "com.example:demo:jar:1.0-SNAPSHOT" { 
+	"com.example:demo:jar:1.0-SNAPSHOT" -> "junit:junit:jar:4.11:test" ; 
+	"com.example:demo:jar:1.0-SNAPSHOT" -> "com.mashape.unirest:unirest-java:jar:1.4.9:compile" ; 
+	"com.example:demo:jar:1.0-SNAPSHOT" -> "org.apache.httpcomponents:httpcore:jar:4.4.11:compile" ; 
+	"com.example:demo:jar:1.0-SNAPSHOT" -> "com.konghq:unirest-java:jar:3.13.6:compile" ; 
+	"com.example:demo:jar:1.0-SNAPSHOT" -> "com.konghq:unirest-java:jar:standalone:3.13.6:compile" ; 
+	"com.example:demo:jar:1.0-SNAPSHOT" -> "org.springframework:spring-web:jar:5.1.9.RELEASE:compile" ; 
+	"junit:junit:jar:4.11:test" -> "org.hamcrest:hamcrest-core:jar:1.3:test" ; 
+	"com.mashape.unirest:unirest-java:jar:1.4.9:compile" -> "org.apache.httpcomponents:httpclient:jar:4.5.2:compile" ; 
+	"com.mashape.unirest:unirest-java:jar:1.4.9:compile" -> "org.apache.httpcomponents:httpasyncclient:jar:4.1.1:compile" ; 
+	"com.mashape.unirest:unirest-java:jar:1.4.9:compile" -> "org.apache.httpcomponents:httpmime:jar:4.5.2:compile" ; 
+	"com.mashape.unirest:unirest-java:jar:1.4.9:compile" -> "org.json:json:jar:20160212:compile" ; 
+	"org.apache.httpcomponents:httpclient:jar:4.5.2:compile" -> "commons-logging:commons-logging:jar:1.2:compile" ; 
+	"org.apache.httpcomponents:httpclient:jar:4.5.2:compile" -> "commons-codec:commons-codec:jar:1.9:compile" ; 
+	"com.konghq:unirest-java:jar:3.13.6:compile" -> "org.apache.httpcomponents:httpcore-nio:jar:4.4.13:compile" ; 
+	"com.konghq:unirest-java:jar:3.13.6:compile" -> "com.google.code.gson:gson:jar:2.8.8:compile" ; 
+	"org.springframework:spring-web:jar:5.1.9.RELEASE:compile" -> "org.springframework:spring-beans:jar:5.1.9.RELEASE:compile" ; 
+	"org.springframework:spring-web:jar:5.1.9.RELEASE:compile" -> "org.springframework:spring-core:jar:5.1.9.RELEASE:compile" ; 
+	"org.springframework:spring-core:jar:5.1.9.RELEASE:compile" -> "org.springframework:spring-jcl:jar:5.1.9.RELEASE:compile" ; 
+ } 

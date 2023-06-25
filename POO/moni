@@ -1,0 +1,22 @@
+create table usuarios(
+    id varchar(100),
+    nome_usuario varchar(50),
+    senha varchar(50),
+    nome_completo varchar(50),
+    biografia text,
+    primary key (id)
+)
+drop table usuarios;
+select * from usuarios;
+delete from usuarios;
+insert into usuarios (id, nome_usuario, senha, nome_completo, biografia) values('1','maria','123','maria', 'lala');
+
+create table seguindo(
+    id_seguindo varchar(100),
+    foreign key (id_seguindo) references usuarios,
+    id_seguidor varchar(100),
+    foreign key (id_seguidor) references usuarios
+)
+select * from seguindo;
+delete from seguindo;
+delete from seguindo where id_seguindo = '34647466-0d0a-4316-8777-68e0863b6ba4' and id_seguidor ='b16cccc9-b7af-45e9-91f3-998a02493c3a';

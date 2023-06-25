@@ -1,0 +1,1 @@
+o Heap Sort divide o input em uma região ordenada e uma região não-ordenada, e reduz iterativamente a região não-ordenada, extraindo o elemento maior e inserindo-o na região ordenada.

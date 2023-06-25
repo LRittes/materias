@@ -1,0 +1,33 @@
+create table character(
+    id int,
+    char_id integer,
+    name varchar(50),
+    birthday varchar(20),
+    occupation varchar(300),
+    img varchar(300),
+    status varchar(20),
+    nickname varchar(50),
+    appearance varchar(300),
+    portrayed varchar(50),
+    category varchar(50),
+    better_call_saul_appearance varchar(300),
+    primary key(id_char)
+);
+
+create table episode(
+    id int,
+    episode_id integer,
+    title varchar(100),
+    season varchar(10),
+    episode varchar(10),
+    air_date varchar(20),
+    characters varchar(300),
+    series varchar(100),
+    primary key(id_ep)
+);
+
+create sequence id_char;
+create sequence id_ep;
+
+select * from character;
+select * from episode;

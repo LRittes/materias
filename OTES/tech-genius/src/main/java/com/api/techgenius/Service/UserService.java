@@ -24,6 +24,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getTopRanking() {
+        return userRepository.getTopRanking();
+    }
+
     public boolean userExists(User user) {
         var auxUser = findUser(user.getName());
         return auxUser.isPresent();

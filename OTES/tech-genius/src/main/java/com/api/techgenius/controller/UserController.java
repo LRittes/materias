@@ -2,9 +2,7 @@ package com.api.techgenius.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +31,16 @@ public class UserController {
         try {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(userService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocorreu um erro!");
+        }
+    }
+
+    @GetMapping("/ranking")
+    public ResponseEntity<Object> getTop10Users() {
+        try {
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(userService.getTopRanking());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocorreu um erro!");
         }

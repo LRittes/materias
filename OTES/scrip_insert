@@ -352,7 +352,7 @@ INSERT INTO answer (id_question, is_correct, answer_text) VALUES (29, false, 'Um
 INSERT INTO answer (id_question, is_correct, answer_text) VALUES (30, false, 'Um tipo de ataque que visa obter acesso a informações confidenciais');
 
 -- Resposta 2 da Questão 10
-INSERT INTO answer (id_question, is_correct, answer_text) VALUES (30, true, 'Um tipo de ataque que visa enganar usuários para obter informações pessoais');
+INSERT INTO answer (id_question, is_correct, answer_text) VALUES (30, true, 'Um conceito que se refere à conexão de objetos físicos à internet');
 
 -- Resposta 3 da Questão 10
 INSERT INTO answer (id_question, is_correct, answer_text) VALUES (30, false, 'Um protocolo de criptografia de dados');

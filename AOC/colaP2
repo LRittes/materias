@@ -1,0 +1,12 @@
+if = pega a instrução
+id = ler registradores/executa []
+ex = execução do comando (alu)
+mem = ler/escrever na memória
+wb = salvar no registrador
+tempo de clock c/ pipeline = o maior tempo entre os itens
+tempo de clock s/ pipeline =  soma do tempo de todos os itens
+latencia = o tempo q vai demorar a execução inteira
+lat c/ pipeline = o maior tempo multiplicado por cada comando q passa
+lat s/ pipe = é a soma da lat de cada comando
+stall = passar informação para um comando anterior
+forwarding - passar instrução para um comando a frente ou na mesma linha de tempo

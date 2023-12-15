@@ -1,0 +1,4 @@
+Quando uma variável declarada como double receber o valor de uma expressão
+de tipo int, o resultado da expressão deve ser convertido para o tipo double. Isso
+é válido para comandos de atribuição, passagem de parâmetros em chamadas de
+funções e para o retorno de funções.

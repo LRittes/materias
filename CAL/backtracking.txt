@@ -1,0 +1,69 @@
+O backtracking é uma técnica de resolução de problemas que se baseia na exploração sistemática de todas as possibilidades, retrocedendo (backtrack) quando se percebe que uma determinada solução parcial não pode levar a uma solução válida. Aqui estão três exemplos de problemas que podem ser resolvidos usando backtracking, juntamente com representações de árvores para resolver versões simplificadas desses problemas:
+
+1. **Quebra-cabeças de Sudoku:**
+
+   - **Nó:** Cada nó na árvore representa uma configuração parcial do tabuleiro de Sudoku.
+   - **Aresta:** Uma aresta conecta duas configurações quando uma decisão é tomada para preencher um valor em uma célula vazia do tabuleiro.
+   
+   Árvore de busca para uma versão simplificada do Sudoku:
+   
+   ```
+         5 _ _ | _ _ _ | _ _ _
+         3 _ _ | _ _ _ | _ _ _
+         7 _ _ | _ _ _ | _ _ _
+         ---------------------
+         6 _ _ | _ _ _ | _ _ _
+         _ _ _ | _ _ _ | _ _ _
+         _ _ _ | _ _ _ | _ _ _
+         ---------------------
+         _ _ _ | _ _ _ | _ _ _
+         _ _ _ | _ _ _ | _ _ _
+         _ _ _ | _ _ _ | _ _ _
+   ```
+
+2. **Problema das N Rainhas:**
+
+   - **Nó:** Cada nó na árvore representa uma disposição parcial das rainhas em um tabuleiro NxN, onde nenhuma rainha ataca outra.
+   - **Aresta:** Uma aresta conecta duas disposições quando uma decisão é tomada para colocar uma rainha em uma linha.
+
+   Árvore de busca para uma versão simplificada do Problema das 4 Rainhas:
+
+   ```
+   Nível 1: [Q] _ _ _
+   Nível 2: [Q] _ _ _   [ ] [Q] _ _
+   Nível 3: [Q] _ _ _   [ ] [Q] _ _   [ ] [ ] [Q] _ _
+   Nível 4: [Q] _ _ _   [ ] [Q] _ _   [ ] [ ] [Q] _ _
+             |            |              |
+           Não coloca    Coloca         Não coloca
+           Rainha        Rainha         Rainha
+   ```
+
+3. **Resolução de Labirintos:**
+
+   - **Nó:** Cada nó na árvore representa uma posição no labirinto.
+   - **Aresta:** Uma aresta conecta duas posições quando uma decisão é tomada para se mover de uma posição para outra.
+
+   Árvore de busca para uma versão simplificada de resolução de um labirinto:
+
+   ```
+   Início
+     |
+   [ ] _ _ _ _
+   |       | |
+   [ ] [ ] [ ] [ ]
+   |   |
+   [ ] [ ] [ ] [ ]
+   |   |
+   [ ] [ ] [ ] [ ]
+       |
+     [ ] _ _ _ _ [F]
+   ```
+   
+   Legenda: 
+   - `[ ]`: Caminho possível
+   - `_`: Parede
+   - `[F]`: Saída do labirinto
+   
+   Nesta árvore, o objetivo é encontrar um caminho do ponto de início até a saída, evitando as paredes.
+
+Em todos esses exemplos, o backtracking é usado para explorar diferentes possibilidades e encontrar soluções válidas, recuando (backtrack) quando uma solução parcial não leva a uma solução válida.

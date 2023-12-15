@@ -1,0 +1,44 @@
+pc = contador do programa -> endereço da instrução naquele momento do código
+
+instruction memory = carrega a instrução da memória
+
+control = opcode, define a operação
+
+read register = lê o endereço do registrador
+
+read data = envia a informação que está no endereço
+
+write register = registrador de destino
+
+write data = informação a ser escrita no registrador
+
+mux antes registrador = 1 -> tipo r; 0 -> I, quem informa é o control 
+
+mux da ALU = 0 -> tipo r; 1 -> I, quem informa é o control 
+
+sign-extend = repete o numero mais a esquerda; 
+11110 -> 11111110
+01 -> 0000001
+aumenta o quantidade de bit sem alterar o número
+
+alu = faz as operações lógicas e matematicas
+
+alu control = determina a operação que alu ira fazer
+
+zero alu = se for zero e se for instrução branch ele pula para instrução do endereço fornecido pela instrução
+
+data memory = controlaDOR DA PILHA
+
+address = endereço do lugar da pilha
+
+write data = a informação a ser escrita
+
+read data = o que foi lido da pilha
+
+memRead= se vai ser lido da pilha
+
+memWrite = se vai ser escrito na pilha
+
+mux depois dm = decide qual informação vai ser passado ao registrador de destino, 1 = o q foi lido da pilha, 0 = vai passar o resultado do calculo da alu
+
+regWrite = se vai ser escrito no registrador ou não 

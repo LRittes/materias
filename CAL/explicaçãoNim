@@ -1,0 +1,62 @@
+Para analisar a árvore de recursão e entender como o computador determina a melhor jogada, vamos começar com a função `findBestMove2`. Vou fornecer uma análise passo a passo da árvore de recursão e mostrar os parâmetros e retornos em cada nó.
+
+Suponha que a função seja chamada com `nCoins` inicial igual a 4.
+
+1. Primeira chamada recursiva:
+   - Parâmetro: `nCoins = 4`
+   - A função entra em um loop com `nTaken` variando de 1 a 3 (devido a `MAX_MOVE`).
+   - Ela faz uma chamada recursiva com `nCoins - nTaken` para `nTaken` igual a 1, 2 e 3.
+
+   1.1. Primeira chamada recursiva:
+       - Parâmetro: `nCoins = 3`
+       - Entra em um loop com `nTaken` variando de 1 a 3.
+       - Faz chamadas recursivas para `nCoins - nTaken`.
+
+       1.1.1. Primeira chamada recursiva:
+             - Parâmetro: `nCoins = 2`
+             - Entra em um loop com `nTaken` variando de 1 a 2.
+             - Faz chamadas recursivas para `nCoins - nTaken`.
+
+             1.1.1.1. Primeira chamada recursiva:
+                   - Parâmetro: `nCoins = 1`
+                   - Entra em um loop com `nTaken` igual a 1.
+                   - Retorna 1, pois o jogo termina (condição de parada).
+
+             1.1.1.2. Segunda chamada recursiva:
+                   - Parâmetro: `nCoins = 0`
+                   - Retorna -1, pois o jogador anterior já venceu (condição de parada).
+
+       1.1.2. Segunda chamada recursiva:
+             - Parâmetro: `nCoins = 1`
+             - Retorna 1, pois o jogador anterior já venceu (condição de parada).
+
+       1.1.3. Terceira chamada recursiva:
+             - Parâmetro: `nCoins = 0`
+             - Retorna -1, pois o jogador anterior já venceu (condição de parada).
+
+   1.2. Segunda chamada recursiva:
+       - Parâmetro: `nCoins = 2`
+       - Entra em um loop com `nTaken` igual a 1.
+       - Faz chamadas recursivas para `nCoins - nTaken`.
+
+       1.2.1. Primeira chamada recursiva:
+             - Parâmetro: `nCoins = 1`
+             - Retorna 1, pois o jogador anterior já venceu (condição de parada).
+
+       1.2.2. Segunda chamada recursiva:
+             - Parâmetro: `nCoins = 0`
+             - Retorna -1, pois o jogador anterior já venceu (condição de parada).
+
+   1.3. Terceira chamada recursiva:
+       - Parâmetro: `nCoins = 1`
+       - Retorna 1, pois o jogador anterior já venceu (condição de parada).
+
+2. Na primeira chamada recursiva, o jogador atual tem três opções: retirar 1, 2 ou 3 moedas. O jogador escolhe retirar 1 moeda, e o jogo continua.
+
+3. Na segunda chamada recursiva, o jogador atual tem duas opções: retirar 1 ou 2 moedas. O jogador escolhe retirar 1 moeda, e o jogo continua.
+
+4. Na terceira chamada recursiva, o jogador atual tem apenas uma opção: retirar 1 moeda. O jogador escolhe retirar 1 moeda, e o jogo termina.
+
+Portanto, o computador determina que a melhor jogada para o jogador com `nCoins = 4` é retirar 1 moeda. Isso é feito recursivamente avaliando todas as possibilidades e escolhendo a melhor jogada com base nas chamadas recursivas.
+
+Note que a função imprime mensagens de depuração para mostrar como está avaliando as jogadas. Elas podem ser úteis para entender o processo de decisão.

@@ -1,0 +1,40 @@
+O que é TCP?
+É um conjunto de protocolos  que possibilita a comunicação entre computadores e servidores, formando a internet.
+Ele combina o Protocolo de Controle de Transmissão (TCP), responsavel pela transmissão de dados, com o Protocolo de Internet (IP), que indentifica os computadores e servidores.
+
+(Soma +1 ao ACK apenas após SYN e FIN)
+
+Ex1:
+
+X1: SYN, seq=24
+Y1: SYN, seq=65, ack=25
+X2: seq=25, ack=66, len=0
+Y2: seq=66, ack=25, len=280
+X3: seq=25, ack=346, len=300
+X4: seq=325, ack=346, len=700
+X5: seq=1025, ack=346, len=450
+Y3: seq=346, ack=1475, len=0
+Y4: seq=346, ack=1475, len=0
+Y5: seq=346, ack=1475, len=360
+X6: seq=1475, ack=706, len=0
+X7: FIN, seq=1475, ack=706, len=0
+Y6: FIN, seq=706, ack=1476, len=0
+X8: seq=1475, ack=707, len=0
+
+Ex2: mSS=3Kb
+
+A: Syn, seq=19, win=2048 - buff=0-2k
+B: Syn, ack=20, seq=99, win=8192 - buff=0-8k
+A: ack=100, seq=20, win=2048 - buff=0-2k
+aplicação escreve 7KB em B
+A: ack=100, seq=20, win=2048, len=3072 - buff=0-2k
+B: ack=3092, seq=100, win=5k, len=0 - buff=3-8k
+A: ack=100, seq=3092, win=2048, len=3072 - buff=0-2k
+B: ack=6164, seq=100, win=2k, len=0 - buff=6-8k
+A: ack=100, seq=6164, win=2048, len=1024 - buff=0-2k
+buff B - entregue a aplicação
+aplicação escreve 4KB em A
+B: ack=7184, seq=100, win=8192, len=2048 - buff=0-8k
+A: ack=100, seq=7184, win=0, len=0 - buff=2-2k
+
+

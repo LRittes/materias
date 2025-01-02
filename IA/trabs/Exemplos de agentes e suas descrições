@@ -1,0 +1,17 @@
+Jogo de damas
+P = número de jogadas por vitória, número de jogadas para prover rainha, quantidade de peças adversária capturadas, quantidade de peças própria capturadas  
+E = tabuleiro, 2 grupos de peças simples, 2 rainhas diferentes
+A = movimentar as peças simples,movimentar as rainhas, remover as peças, trocar a peça simples por rainha
+S = Posição das peças, há ou não rainha
+
+Táxi automatizado
+P = maximizar lucro e quantidade de clientes, 
+E = veiculos, rua, placa, sinaleiro, pedestre, lombada, calçada, animais
+A = movimentar o veiculo para todas as direções, frear, acelerar, trocar marcha, ligar, desligar, fechar e abrir porta
+S = distância dos objetos detectados, gps, sensor
+
+Jogo de palavras cruzadas
+P = se as palavras estão de acordo com o gabarito, minimizar tempo,
+E = campos vazias para escrever, dicas
+A = escrever e apagar os caracteres, 
+S = percepção do ambiente, quais já foram preenchidas, quais estão vazias , leitura das dicas, 

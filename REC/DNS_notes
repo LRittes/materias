@@ -1,0 +1,30 @@
+O que é DNS?
+Servidor que faz a tradução e busca do dominio (www.google.com) para ip (203.201.198.123)
+
+registro A?
+dominio -> IP (IPV4)
+
+registro AAAA?
+dominio -> IP (IPV6)
+
+registro MX?
+dominio -> servidor de email
+
+registro CNAME?
+dominio -> nome
+
+como acessar um site
+1º resolver (q faz parte do sistema dns e roda no pc do usuário) encaminha o dominio do site para o servidor recursivo, se o recursivo tiver o site em cache devolve na hora ao resolver, caso não (passo 2)
+
+2º o recursivo encaminha o site para o servidor raiz, ele observa o final (.br, .en, .org, .info, etc) e encaminha ao autoritavivo responsavel por esse final  
+
+3º o autoritavivo com o final do dominio encaminha ao autoritativo que de fato tem o site desejado 
+
+4º o autoritavivo responsavel por esse site envia devolta (no formato de ip) ao recursivo 
+
+5º o recursivo encaminha ao resolver 
+  
+Há dezenas de servidores DNS espalhados pelo mundo.
+há dezenas de servidores raizes, cada um comando os autoritativos de primeiro nivel
+Há 2 tipos servidores de primeiro nivel os de paises (.br, .pt)(ccTLDs) e genéricos (.com, .org)(gTLDs), esses servidores sõa chamados de autoritativos
+Os computadores utilizam o sistema resolver que encaminhará a solicitação para o servidor recursivo que está no provedor, se o recursivo tiver ele em cache ele devolve ao resolver caso contrário envia ao servidor raiz para buscar o site desejado, o raiz encaminha aos autoritavos q obtem o final do dominio (.br, .en, .org, .info, etc) o autoritavivo com o final do dominio encaminha ao autoritativo que de fato tem o site desejado e o envia devolta ao recursivo que encaminha ao resolver q roda no computador do usuário 

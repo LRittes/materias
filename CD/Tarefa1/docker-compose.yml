@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "cd_tarefa1:/var/lib/postgresql/data"
+      - "/home/rittes/Docs/Atividades Facul/CD/Tarefa1/dados/eplusout.sql:/docker-entrypoint-initdb.d/eplusout.sql"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "leandro_rittes@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+volumes:
+  cd_tarefa1:

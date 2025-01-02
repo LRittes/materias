@@ -1,0 +1,38 @@
+O PENSAMENTO ARTIFICIAL
+
+jogo de um efeito pelo espirito; depois, a comparação deste
+efeito com a finalidade; depois, a correção dos fatores para
+obtenção do efeito mais próximo do ideal. E a própria me-
+moria não é senão o registro das mensagens retroativas que
+analisam os efeitos passados segundo seu sucesso ou insucesso.
+
+Quando a maquina não tinha ainda ‘feed-back’, era in-
+capaz de agir sozinha: totalmente atáxica! Se tinha que ser
+deixada entregue a si mesma, era limitada, então, a um pro-
+grama determinado pelo homem; sobrevindo a menor cir-
+cunstância imprevista, ela não se podia adaptar. Por isso, o
+homem precisava conduzi-la como a um enfêrmo. Em reali-
+dade ele dava-lhe o ‘‘feed-back’’ que lhe faltava: observava o
+seu trabalho e, detectando os desvios por comparação à fina-
+lidade que lhe impusera, agia sobre determinados fatores dei-
+xados livres para se fazer a regulagem. Assim, a maquina
+pode ser considerada como o ‘‘reator’’ do sistema homem-
+maquina regulado por uma retroação.
+
+Quando chegaram as primeiras verdadeiras moquinas,
+bem cedo um gênio inventou o ‘‘feed-back’’: Watt criou o seu
+“‘governor’’, não por teoria nem por logica, mas por instinto
+de tecnico. ;
+
+Isto é, pelo menos, correntemente admitido pela nova
+ciência.
+
+é, porom, verdade que todo trabalho era, antes do vapor,
+regularizado por ‘‘feed-backs’’ humanos ou animais. Nao
+se utilizaria algum agente natural que não era, em verdade,
+muito regular — o vento. Compensar furacoes e brisas não
+era, para um moinho de vento, necessidade mais imperiosa
+ainda do que, para uma maquina a vapor, arbitrar as varia-
+ções de sua carga.. É possivel que a humanidade tenha,
+durante seculos, utilizado moinhos sem ter encontrado um meio
+de evitar empiricamente os saltos de regime devidos aos saltos

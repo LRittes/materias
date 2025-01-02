@@ -1,0 +1,18 @@
+1
+pure def max(x: int, y: int): int = if (x > y) x else y
+pure def maior(s: Set[int]): int = s.fold(oneOf(s),(acc,i) => max(acc,i))
+
+2
+pure def sizeL(l: List[{name: str, idade: int}]): int = l.fold(0, (acc,i) => acc + 1)
+pure def average(lr: List[{name: str, idade: int}]): int = ((lr.fold(0, (acc,r) => acc + r.idade)/sizeL(lr)))
+
+3
+pure def fors(s: Set[int]): bool = s.filter(v => v == 5 or v == 6)
+pure def sfors(s: Set[int]): Set[Set[int]] = s.powerset().filter(x => size(fors(x)) > 0)
+
+4
+pure def invL(l: List[int]): List[int] = l.foldr([] , (i, acc) => acc.append(i))
+
+5
+pure def mapNamToAge(s: Set[Rec]): Set[Map] = s.map(x => Map(field(x,"nome") -> field(x,"idade")))
+

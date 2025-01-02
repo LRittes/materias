@@ -1,0 +1,35 @@
+diff --git a/rpg.qnt b/rpg.qnt
+index e3ec808..f3eacc0 100644
+--- a/rpg.qnt
++++ b/rpg.qnt
+@@ -67,7 +67,8 @@ module rpg{
+             else if(attacker.Taunt != "None"){
+                 //if the creature who taunted is immune, it doesnt receive damage and loses immune, and attacker is not taunted anymore
+                 if(receiver.Immune == true)
+-                    creatures' = creatures.setBy(receiver.name, c => c.damage(0)).setBy(receiver.name, c => c.deimmune()).setBy(attacker.name, c => c.detaunt())
++                    // A criatura não deve perder imunidade ao ser atacada. Só perde no início do turno do clérigo.
++                    creatures' = creatures.setBy(receiver.name, c => c.damage(0)).setBy(attacker.name, c => c.detaunt())
+ 
+                 //else just attack the creature who taunted and lose taunt
+                 else
+@@ -75,7 +76,8 @@ module rpg{
+             }
+             //if receiver is immune, cancel damage and loses immune
+             else if(receiver.Immune == true){
+-                creatures' = creatures.setBy(receiver.name, c => c.damage(0)).setBy(receiver.name, c => c.deimmune())
++                // A criatura não deve perder imunidade ao ser atacada. Só perde no início do turno do clérigo.
++                creatures' = creatures.setBy(receiver.name, c => c.damage(0))
+             } 
+             //if its the first round, monster does less damage
+             else if (attacker.role == Monster){
+@@ -190,4 +192,8 @@ module rpg{
+ 
+     val immune_test = creatures.values().forall(c => c.Immune == false)
+ 
+-}
+\ No newline at end of file
++    val not_cheating = match last_turn {
++      | Some(a) => a.move == "Attack" implies not(a.attacker.Paralized)
++      | _ => true
++    }
++}

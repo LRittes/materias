@@ -1,0 +1,124 @@
+a) Quais são as principais diferenças entre as tecnologias de sensores CCD e
+CMOS; 
+Resolução e Fidelidade de Cores: CCD pode atingir até 3.200 megapixels e oferece maior fidelidade de cores, enquanto CMOS chega a 200 megapixels e tem menor fidelidade de cores.
+
+Velocidade de Captura: CCD tem maior velocidade de captura, podendo passar dos 45 fps, enquanto CMOS tem velocidade de captura menor, limitada a 11 fps.
+
+Consumo de Energia: CCD tem maior consumo de energia, até 100x mais que CMOS, o que é um fator importante para dispositivos portáteis que utilizam bateria
+
+b)Responda justificando. Entre Global Shutter Timing ou Rolling Shutter Timing,
+qual é o tipo de leitura de sensor mais adequado para uso na aquisição de vídeo
+de imagens nas seguintes situações:
+i. Captura de uma cena de pessoas caminhando em um corredor de um
+aeroporto;
+ii. Captura de imagens de uma hélice a 900 rpm (rotações por minuto).
+
+i. Captura de uma cena de pessoas caminhando em um corredor de um aeroporto: Para essa situação, o Global Shutter Timing é mais adequado. O sensor Global Shutter captura todo o quadro de uma vez, o que é ideal para capturar movimentos rápidos e detalhes de objetos em movimento, como pessoas caminhando. Isso permite que a câmera capture todas as informações visuais simultaneamente, evitando distorções e artefatos causados pela exposição progressiva que ocorre com o Rolling Shutter Timing 25.
+
+ii. Captura de imagens de uma hélice a 900 rpm (rotações por minuto): Neste caso, o Rolling Shutter Timing é mais adequado. O sensor Rolling Shutter captura imagens em uma sequência progressiva, o que é ideal para capturar objetos em movimento suave, como uma hélice girando a uma velocidade constante. A exposição progressiva permite que a câmera capture a hélice em movimento sem distorções ou artefatos que poderiam ocorrer se a câmera tentasse capturar todo o quadro de uma vez, como aconteceria com um sensor Global Shutter. Isso é especialmente importante em situações onde o movimento é constante e não há necessidade de capturar detalhes rápidos ou em movimento
+
+2
+a) Qual é a aparência de cada canal RGB quando exibido individualmente?
+Quando os canais RGB de uma imagem são exibidos individualmente, cada canal representa uma versão em tons de cinza da imagem original. O canal vermelho (R) exibirá regiões da imagem original que são mais vermelhas, o canal verde (G) exibirá regiões que são mais verdes, e o canal azul (B) exibirá regiões que são mais azuis. As regiões que contêm uma mistura de cores aparecerão mais claras em todos os três canais, enquanto as regiões que são mais escuras ou que não contêm essa cor específica aparecerão mais escuras
+
+b) É possível se ter uma imagem visualmente em tons de cinza por meio de uma
+estrutura RGB com os 3 canais (três matrizes de brilhos)?
+Qual seria a característica de cada canal, nesse caso?
+
+Sim, é possível ter uma imagem visualmente em tons de cinza por meio de uma estrutura RGB com os três canais (três matrizes de brilhos). Para isso, cada canal (R, G, B) deve ser ajustado para ter a mesma intensidade. Isso pode ser feito através de uma operação matemática simples que soma os valores dos canais R, G e B e divide o resultado por 3, resultando em uma imagem em tons de cinza que representa a intensidade média de luz em cada pixel. Cada canal terá a mesma intensidade, refletindo a luminosidade da imagem original sem distinção de cores
+
+c) Existem outros sistemas de cor além do RGB? Cite alguns casos e suas
+características.
+CMYK (Cyan, Magenta, Yellow, Key/Black)
+LAB
+Pantone Matching System (PMS)
+YUV
+HSL (Hue, Saturation, Lightness)
+
+3
+b) Explique o método da pseudo-cor (falsa cor) usado para a conversão de uma
+imagem em tons de cinza para uma versão em RGB. Esse método pode ser
+aplicado na colorização de filmes em “preto e branco” ou para enfatizar certas
+áreas de uma imagem, por exemplo;
+
+Para converter uma imagem em tons de cinza para RGB, o método da pseudo-cor utiliza a informação de luminosidade (ou intensidade de cor) da imagem em tons de cinza para determinar os valores dos canais R, G e B. A ideia básica é que, em uma imagem em tons de cinza, a intensidade de cor de cada pixel é a mesma para os três canais. Portanto, ao converter uma imagem em tons de cinza para RGB, podemos simplesmente copiar o valor de luminosidade para cada um dos três canais. Isso resulta em uma imagem RGB onde a intensidade de cor é a mesma para todos os canais, mantendo a aparência em tons de cinza, mas agora com a capacidade de ser manipulada como uma imagem colorida.
+
+c) explique o método de cross-fading usado para transições suaves de quadros em
+vídeo e/ou simular sequências de morfismo entre quadros de um vídeo.
+
+Para criar um efeito de cross-fading, você precisa de dois clips que se sobreponham na linha do tempo. O primeiro passo é posicionar o segundo clip acima ou abaixo do primeiro, de modo que eles se sobreponham por toda a duração da transição. Em seguida, você aplica um fade-out no primeiro clip, fazendo com que ele desapareça gradualmente. Simultaneamente, você aplica um fade-in no segundo clip, fazendo com que ele apareça gradualmente. Ajustar a duração dos fades para que eles coincidam garante uma transição suave entre os dois clips
+
+4) Qual o tamanho em pixels de uma imagem gerada na saída de um sensor
+monocromático (tons de cinza) cuja área de amostragem é de 0,2 cm x 0,3 cm, cada
+célula desse sensor tem dimensões 0,01mm x 0,02 mm? 
+
+Converter as dimensões da área de amostragem para milímetros: A área de amostragem é dada em centímetros, então precisamos converter para milímetros para estar na mesma unidade das dimensões das células do sensor. 0,2 cm = 20 mm e 0,3 cm = 30 mm.
+Calcular o número de células na área de amostragem: Para isso, dividimos as dimensões da área de amostragem pelas dimensões de uma célula do sensor. Para a largura, temos 20 mm / 0,01 mm = 200 células. Para a altura, temos 30 mm / 0,02 mm = 150 células.
+Converter o número de células para pixels: Como cada célula do sensor corresponde a um pixel na imagem gerada, o número de células é igual ao número de pixels. Portanto, a imagem terá 200 pixels de largura e 150 pixels de altura.
+Assim, o tamanho em pixels de uma imagem gerada na saída de um sensor monocromático com as especificações dadas é de 200 pixels de largura por 150 pixels de altura.
+
+5) Suponha que a amostragem realizada por um sensor digital produziu a matriz abaixo,
+valores em mV (milivolts). Cada valor representa uma intensidade de brilho (tons de
+cinza) vinda da cena adquirida.
+A) Considerando que se trate de um sistema embarcado em um hardware com
+uma severa restrição de memória. Quantos bits por pixel (bpp) você utilizaria para
+representar todos as diferentes intensidades de brilho capturadas na matriz
+amostrada? Discuta o caso e faça a discretização e digitalização dessa imagem,
+produzindo uma imagem digital de saída.
+6.8 6.8 6.8 6.8 6.8 6.8
+1.8 1.8 1.8 1.8 1.8 1.8
+6.8 6.8 6.8 6.8 6.8 6.8
+1.8 1.8 1.8 1.8 1.8 1.8
+6.8 6.8 6.8 6.8 6.8 6.8
+1.8 1.8 1.8 1.8 1.8 1.8
+
+A matriz amostrada apresenta dois valores distintos de intensidade de brilho: 6.8 mV e 1.8 mV. Isso significa que a imagem tem apenas duas intensidades de brilho distintas.
+
+Para representar duas intensidades distintas, o mínimo de bits por pixel (bpp) necessário é 1 bit, pois 2^1 = 2, o que é suficiente para representar duas intensidades distintas.
+
+Agora, vamos discretizar e digitalizar a imagem, produzindo uma imagem digital de saída com 1 bit por pixel. Para isso, vamos considerar que um valor de 6.8 mV representa um pixel "ligado" (ou branco) e um valor de 1.8 mV representa um pixel "desligado" (ou preto).
+
+A imagem digital de saída, com 1 bit por pixel, seria:
+
+1 1 1 1 1 1
+0 0 0 0 0 0
+1 1 1 1 1 1
+0 0 0 0 0 0
+1 1 1 1 1 1
+0 0 0 0 0 0
+
+B) Considere que a sua câmera possa realizar digitalizações com as seguintes
+profundidades de pixels (diferentes resoluções radiométricas): 1bpp, 2 bpp, 4bpp, 8
+bpp, 12 bpp. Compare os resultados obtidos para discretização e digitalização
+dessas imagens em termos da resolução de detalhes das imagens. Discuta um
+critério de escolha, entre as alternativas de digitalização, se o sistema de
+processamento de imagens (posterior à captura da cena) tiver restrições de
+memória.
+6.8 6.87 6.89 6.89 6.87 6.8
+5.8 5.87 5.89 5.89 5.87 5.8
+4.8 4.87 4.89 4.89 4.87 4.8
+3.8 3.87 3.89 3.89 3.87 3.8
+2.8 2.87 2.89 2.89 2.87 2.8
+1.8 1.87 1.89 1.89 1.87 1.8
+
+1bpp
+Resolução de detalhes: Com apenas 1 bit por pixel, a imagem será extremamente simplificada, com apenas dois níveis de intensidade de brilho (branco e preto). Isso resulta em uma imagem com pouca ou nenhuma resolução de detalhes.
+Critério de escolha: Ideal para sistemas com restrições de memória severas, pois utiliza a menor quantidade de memória. No entanto, a perda de detalhes pode ser significativa, tornando-a menos adequada para aplicações que requerem uma representação precisa da imagem.
+2bpp
+Resolução de detalhes: Com 2 bits por pixel, a imagem terá 4 níveis de intensidade de brilho. Isso permite uma representação mais detalhada do que o 1bpp, mas ainda assim bastante simplificada.
+Critério de escolha: Oferece um equilíbrio entre a quantidade de memória utilizada e a resolução de detalhes. Pode ser adequada para sistemas com restrições de memória moderadas, onde a perda de detalhes é aceitável.
+4bpp
+Resolução de detalhes: Com 4 bits por pixel, a imagem terá 16 níveis de intensidade de brilho. Isso permite uma representação mais detalhada do que as resoluções anteriores, mas ainda assim com uma quantidade limitada de níveis de intensidade.
+Critério de escolha: Aumenta a resolução de detalhes em comparação com as resoluções mais baixas, tornando-se uma opção melhor para sistemas com restrições de memória moderadas, onde a precisão na representação da intensidade de brilho é importante.
+8bpp
+Resolução de detalhes: Com 8 bits por pixel, a imagem terá 256 níveis de intensidade de brilho. Isso permite uma representação muito detalhada, com uma quantidade significativa de níveis de intensidade, o que é ideal para imagens com muitos detalhes finos.
+Critério de escolha: Ideal para sistemas com restrições de memória moderadas a severas, onde a precisão na representação da intensidade de brilho é crucial. Aumenta significativamente a resolução de detalhes em comparação com as resoluções mais baixas.
+12bpp
+Resolução de detalhes: Com 12 bits por pixel, a imagem terá 4096 níveis de intensidade de brilho. Isso permite uma representação extremamente detalhada, com uma quantidade muito grande de níveis de intensidade, o que é ideal para imagens com detalhes muito finos.
+Critério de escolha: Adequada para sistemas com restrições de memória severas, onde a precisão na representação da intensidade de brilho é de extrema importância. Oferece a maior resolução de detalhes entre as opções disponíveis.
+
+8) Qual é a relação entre a resolução espacial de uma imagem e o desempenho
+computacional do processamento de imagens, especialmente para transformações
+baseadas em pixels?
+
+a resolução espacial de uma imagem tem um impacto significativo no desempenho computacional do processamento de imagens. Aumentar a resolução espacial de uma imagem aumenta a complexidade computacional necessária para processar a imagem, exigindo mais recursos de hardware e a otimização de algoritmos para manter um desempenho aceitável.

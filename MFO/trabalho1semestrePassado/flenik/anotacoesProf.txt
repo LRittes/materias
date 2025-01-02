@@ -1,0 +1,15 @@
+As criaturas não perdem imunidade no início do turno clérigo quando o clérigo está paralizado.
+
+"Os ataques de monstro sempre dão 20 de dano, exceto se esse for o primeiro turno de *toda* a batalha (ninguém jogou ainda)"
+- Na sua especificação, o monstro da 20 de dano mesmo se ele não for o primeiro a jogar
+
+"Personagens da classe bárbaro tem habilidade de provocar um monstro para que ele passe a somente atacar o bárbaro, ignorando os outros personagens.
+Uma criatura provocada ataca somente quem a provocou.". Sendo que ataque é defindo por "Ataques são a forma de dar dano em criaturas".
+- Na sua especificação, a provocação também afeta paralisia, não somente ataque
+
+Sua inv é definida como "ninguém morre", e sua ninguemMorre é definida como "nenhum personagem/herói morre".
+
+Seu attributo "Morto" do Personagem não serve pra nada! (Só serviu pra me confundir na correção, haha)
+
+Pontos positivos:
+- Uso de tipos soma no last_attack

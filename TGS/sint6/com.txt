@@ -1,0 +1,38 @@
+148 O PENSAMENTO ARTIFICIAL
+
+É preciso que, neste livro, não nos deixemos arrastar aos nu
+merosos casos que se oferecem, memo que sejam reais: não
+podemos seguir todos os que se abrem nas profundezas ciber
+néticas, na maior parte inexploradas. Até onde teriamos sido conduzidos.
+
+No entanto, um ponto de equilíbrio químico nem sempre
+depende apenas da relação dos elementos presentes: quando as
+reações modificam a pressão ou a temperatura, êle depende
+também da pressão e da temperatura. Assim se aplica a
+grande “lei de moderação”, ou lei de Van't Hoff e Le Chá-
+telier:
+
+Quando um sistema está em equilíbrio real, a modifica-
+ção de um dos fatôres do equilíbrio provoca um deslocamento
+da posição do sistema no sentido que tende a atenuar o efeito
+do causa perturbante. .
+
+Não se acredifaria estar lendo uma definição do retroa-
+cão negativa? Em realidade, o sistema Van't Hoff e Le Chá-
+telier é, naturalmente, equilibrado por uma retroação negati-
+va, mas segundo modalidades muito particulares. que tornam
+sua análise delicada.
+
+Suponhamos um sal em presença de uma solução satura-
+da dêsse sal. Quando a temperatura sobe, um excesso de sal
+se dissolve. Por que? Porque a dissolução é acompanhada
+de uma absorção de calor, pois ela é endotérmica. Segundo
+a lei de moderação, o único deslocamento de equilíbrio poss
+vel é o que vai compensar a elevação da temperatura, que
+absorverá o calor: o aumento do solução. A absorção do
+calor depende do efeito “dissolução; ela é o “detector”,
+retronge sôbre o fator “temperatura”, para diminuí-lo. A
+lei volta, então, a formular que a mensagem retroativa deve
+sempre, para manutenção do equilíbrio, ser oposta à variação
+do fator. E isto já sabemos pela lógica dos efeitos.
+

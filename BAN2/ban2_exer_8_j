@@ -1,0 +1,39 @@
+--8)Gatilho para impedir que mais de 1 conserto seja agendado no mesmo setor na mesma hora.
+
+CREATE OR REPLACE FUNCTION limitandoConsertos() RETURNS TRIGGER AS
+$$
+DECLARE 
+    setorCodigo INT;
+BEGIN
+    setorCodigo := (
+        SELECT cods 
+        FROM mecanico 
+        WHERE codm = NEW.codm
+        LIMIT 1
+    );
+
+    IF EXISTS (
+        SELECT 1
+        FROM conserto c
+        JOIN mecanico m ON c.codm = m.codm
+        WHERE m.cods = setorCodigo
+          AND c.data = NEW.data
+          AND c.hora = NEW.hora
+    ) THEN
+        RAISE EXCEPTION 'Não foi possível cadastrar esse conserto, pois esse setor está ocupado no horário em questão';
+    END IF;
+
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER limitandoConsertos 
+BEFORE INSERT ON conserto 
+FOR EACH ROW EXECUTE PROCEDURE limitandoConsertos();
+
+insert into conserto values(1, 2, '2017-08-03', '13:30:00');
+insert into conserto values(8, 1, '2017-08-03', '13:30:00');
+
+select * from conserto
+select * from mecanico

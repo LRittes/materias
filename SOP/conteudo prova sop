@@ -1,0 +1,134 @@
+Modulos din ´ amicos ˆ : componentes que podem ser carregados e
+descarregados dinamicamente para dentro de um kernel
+monol´ıtico
+
+Hipervisores tipo 1 e tipo 2
+Tipo 1: executa direto sobre o Hardware
+▶ Xen, VMware ESX/ESXi, IBM z/VM
+ Tipo 2: executa em um SO hospedeiro → MMV e um processo ´
+▶ VirtualBox, VMware Workstation
+
+MIPS tem 3 n´ıveis de privilegio, controlados por 2 bits ( ´ KSU) no
+registrador de status (SR, status register) do CP0
+▶ KSU = 0: usuario ´
+▶ KSU = 1: supervisor [nao usado] ˜
+▶ KSU = 2: kernel
+Chaveamento
+▶ usuario ´ → kernel: syscall
+▶ kernel → usuario: ´ eret
+
+Tipos de processos
+Processos interativos: interagem com usuarios ´
+I primeiro plano (foreground)
+Processos de segundo plano (background): servic¸os do sistema
+I daemons
+
+Condic¸oes para o t ˜ ermino de um processo: ´
+I sa´ıda normal (voluntaria) ´
+I sa´ıda por erro (voluntaria) ´
+F programa detecta um erro
+I erro fatal (involuntario) ´
+F programa faz algo ilegal
+I cancelamento por outro processo (involuntario) 
+
+A thread representa o estado atual de execuc¸ao˜ do processo
+I contador de programa, registradores, pilha
+
+Vantagens de threads
+Possibilitar soluc¸oes paralelas para problemas ˜
+I cada thread sequencial se preocupa com uma parte do problema
+I interessante em aplicac¸oes dirigidas a eventos ˜
+Desempenho
+I criar e destruir threads e mais r ´ apido ´
+I o chaveamento de contexto e muito mais r ´ apido ´
+I permite combinar threads I/O-bound e CPU-bound
+
+nucleo escalona processos, n ´ ao threads
+o escalonamento de threads e feito pela biblioteca
+
+Threads de usuario
+Vantagens
+I permite usar threads em SOs que nao t ˜ em suporte ˆ
+I chaveamento de contexto entre threads nao requer chamada de ˜
+sistema → desempenho
+Desvantagens
+I tratamento de chamadas bloqueantes
+I preempc¸ao por tempo ˜ e complicada
+
+Threads de nucleo ´
+Vantagens
+I facilidade para lidar com chamadas bloqueantes
+I preempc¸ao entre threads ˜
+Desvantagens
+I operac¸oes envolvendo threads t ˜ em custo maior ˆ
+F exigem chamadas ao nucleo
+
+por definic¸ao, processos executam em espac¸os de enderec¸amento ˜
+distintos (memoria privada) e threads executam no mesmo espac¸o ´
+de enderec¸amento (memoria compartilhada)
+
+Quatro condic¸oes necess ˜ arias para prover exclus ´ ao m ˜ utua: ´
+1. Nunca dois processos podem estar simultaneamente em uma
+regiao cr ˜ ´ıtica
+2. Nenhuma afirmac¸ao sobre velocidades ou n ˜ umero de CPUs ´
+3. Nenhum processo executando fora de sua regiao cr ˜ ´ıtica pode
+bloquear outros processos
+4. Nenhum processo deve esperar eternamente para entrar em sua
+regiao cr ˜ ´ıtica
+
+Desabilitac¸ao de interrupc¸ ˜ oes ˜
+Se as interrupc¸oes forem desabilitadas o processo n ˜ ao perde a ˜
+CPU
+I transic¸oes de estado ocorrem por interrupc¸ ˜ oes de tempo ou E/S ˜
+Poder demais para processos de usuario ´
+I podem deixar de habilitar as interrupc¸oes (de prop ˜ osito ou n ´ ao) ˜
+Nao funciona em multiprocessadores ˜
+Muito usada no nucleo do SO para sec¸ ´ oes cr ˜ ´ıticas curtas
+I exemplo: atualizac¸ao de listas encadeadas
+
+Instruc¸ao TSL ( ˜ test and set lock)
+Instruc¸ao de m ˜ aquina que l ´ e o conte ˆ udo de uma vari ´ avel e ´
+armazena o valor 1 nela
+I operac¸ao at ˜ omica (indivis ˆ ´ıvel)
+Exige suporte de hardware
+Funciona para varios processadores ´
+I barramento de memoria ´ e travado para evitar acessos simult ´ aneos
+
+Primitivas bloqueantes
+Primitivas bloqueantes bloqueiam o processo chamador ate que ´
+ele seja sinalizado (tipicamente por outro processo)
+
+Um semaforo S ´ e uma vari ´ avel com dois atributos ´
+I um contador
+I uma fila de processos bloqueados no semaforo ´
+I quando negativo, o modulo do contador indica quantos processos ´
+estao bloqueados em S ˜
+Semaforo s ´ o pode ser manipulado por duas primitivas ´ atomicas ˆ
+I down(S): decrementa S; se S<0, bloqueia
+I up(S): incrementa S; se S≤0, acorda um processo que esta´
+esperando por S
+RCs relacionadas devem estar protegidas pelo mesmo semaforo
+
+Futexes tentam combinar os benef´ıcios das duas abordagens
+1. A tentativa de travar um futex ocorre em espac¸o de usuario ´
+2. Se o futex ja estava travado, ocorre uma chamada para o kernel ´
+para colocar o processo em uma fila de bloqueados
+3. Ao liberar o futex, o processo que o detinha verifica se ha´
+processos bloqueados; se houver, avisa ao kernel para
+desbloquear um deles
+Kernel so´ e envolvido quando ocorrer contenc¸ ´ ao
+
+Semaforos vs. monitores ´
+Monitores sao mais f ˜ aceis de programar, e reduzem a ´
+probabilidade de erros
+I ordem de down() e up()
+Monitores dependem de linguagem de programac¸ao, enquanto ˜
+semaforos s ´ ao implementados pelo SO ˜
+I podem ser usados com C, Java, BASIC, ASM, . . .
+Ambos podem ser usados apenas em sistemas centralizados
+(com memoria compartilhada) ´
+I sistemas distribu´ıdos usam passagem de mensagens
+
+Barreiras
+Mecanismo usado para definir um ponto de sincronizac¸ao para ˜
+multiplos processos/threads

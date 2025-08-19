@@ -1,0 +1,57 @@
+-- Função que será chamada pelo trigger
+CREATE OR REPLACE FUNCTION verificar_disponibilidade_quarto()
+RETURNS TRIGGER AS $$
+DECLARE
+    quartos_disponiveis INTEGER;
+    quartos_total INTEGER;
+    quartos_reservados INTEGER;
+BEGIN
+    -- Verifica se há sobreposição de datas com outras reservas para o mesmo tipo de quarto no mesmo hotel
+    SELECT COUNT(*)
+    INTO quartos_reservados
+    FROM Reserva r
+    WHERE r.cod_hotel = NEW.cod_hotel
+      AND r.tipo_quarto = NEW.tipo_quarto
+      AND r.status = 'confirmada'
+      AND r.cod_reserva != COALESCE(NEW.cod_reserva, 0)  -- Ignora a própria reserva em caso de UPDATE
+      AND (
+          -- Verifica se há sobreposição de datas:
+          -- 1. O check-in da nova reserva ocorre durante uma reserva existente
+          (NEW.data_checkin_prevista >= r.data_checkin_prevista AND 
+           NEW.data_checkin_prevista < r.data_checkout_previsto)
+          OR
+          -- 2. O check-out da nova reserva ocorre durante uma reserva existente
+          (NEW.data_checkout_previsto > r.data_checkin_prevista AND 
+           NEW.data_checkout_previsto <= r.data_checkout_previsto)
+          OR
+          -- 3. A nova reserva engloba completamente uma reserva existente
+          (NEW.data_checkin_prevista <= r.data_checkin_prevista AND 
+           NEW.data_checkout_previsto >= r.data_checkout_previsto)
+      );
+
+    -- Obtém o número total de quartos deste tipo neste hotel
+    SELECT COUNT(*)
+    INTO quartos_total
+    FROM Quarto q
+    WHERE q.cod_hotel = NEW.cod_hotel
+      AND q.tipo_quarto = NEW.tipo_quarto;
+
+    -- Se o número de quartos reservados for igual ao número total de quartos,
+    -- não há disponibilidade e deve-se rejeitar a reserva
+    IF quartos_reservados >= quartos_total THEN
+        RAISE EXCEPTION 'Não há quartos disponíveis do tipo % no hotel % para o período de % a %', 
+                        NEW.tipo_quarto, NEW.cod_hotel, 
+                        NEW.data_checkin_prevista, NEW.data_checkout_previsto;
+    END IF;
+
+    -- Se chegou aqui, há disponibilidade
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Criação do trigger
+CREATE TRIGGER verificar_disponibilidade_antes_reserva
+BEFORE INSERT OR UPDATE ON Reserva
+FOR EACH ROW
+WHEN (NEW.status = 'confirmada')
+EXECUTE FUNCTION verificar_disponibilidade_quarto();

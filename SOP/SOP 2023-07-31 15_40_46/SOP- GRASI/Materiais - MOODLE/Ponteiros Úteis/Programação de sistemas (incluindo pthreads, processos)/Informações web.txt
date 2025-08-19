@@ -1,0 +1,27 @@
+:: POSIX Threads Programming
+	Tutorial clássico sobre programação com Pthreads
+	Clique o link https://computing.llnl.gov/tutorials/pthreads/index.html para abrir o recurso
+
+:: Multi-Threaded Programming With POSIX Threads
+	Outro tutorial sobre programação com Pthreads, que contém diversas recomendações para a construção de aplicações multithreaded
+	Clique o link http://users.actcom.co.il/~choo/lupg/tutorials/multi-thread/multi-thread.html para abrir o recurso
+
+:: Pthread Primer
+	Introdução rápida a Pthreads, ilustrando criação/destruição de threads e uso de mutexes, semáforos e barreiras
+	Clique o link http://pages.cs.wisc.edu/~travitch/pthreads_primer.html para abrir o recurso
+
+:: Advanced Linux Programming (ALP)
+	Livro sobre programação em Linux, com explicações acessíveis e capítulos disponíveis gratuitamente em PDF
+	Clique o link http://mentorembedded.github.io/advancedlinuxprogramming/ para abrir o recurso
+
+:: An Introduction to Linux IPC (Michael Kerrisk)
+	Apresentação sobre diversas técnicas de IPC no Linux:
+		pipes
+		filas de mensagens (message queues)
+		memória compartilhada
+		semáforos
+		locks de arquivo
+		sockets
+	Inclui um guia para a escolha do mecanismo mais apropriado em função de alguns critérios.
+	Tutorial em vídeo disponível em: 
+	Clique o link http://man7.org/conf/lca2013/IPC_Overview-LCA-2013-printable.pdf para abrir o recurso

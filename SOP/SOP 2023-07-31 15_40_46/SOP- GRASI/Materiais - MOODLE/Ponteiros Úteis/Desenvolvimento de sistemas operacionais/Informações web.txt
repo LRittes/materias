@@ -1,0 +1,4 @@
+:: Understanding the Linux Virtual Memory Manager (Mel Gorman)
+	Clique o link https://www.kernel.org/doc/gorman/ para abrir o recurso
+
+:: http://freesoftwaremagazine.com/

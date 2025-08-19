@@ -1,0 +1,115 @@
+slide 1
+Sobre funções implicitas
+principio...
+funcionamento...
+Bom as funções implícitas buscam definir uma função f(x,y,z)=0, ou seja, com base nos pontos de nuvem eu encontro a função que com base nesses pontos fazem a função igualar a 0.
+Com essa função eu consigo contruir a superficie do objeto 3d porque eu consigo encontrar os outros pontos no espaço que satifaz a função, isso é conhecido como a "superfície de nível zero" da função.
+Aqui são alguns exemplos de técnicas que utilizam funções implicitas.
+...
+
+slide 2
+Aqui são alguns exemplos da função implicita.
+
+-- img1 
+A mais conhecida entre nós que a função da esfera ...
+
+-- img 2
+E aqui ao lado as nuvens de pontos e a reconstrução do objeto utilizando a função implicita encontrada com a nuvens de pontos.
+ 
+
+slide 3
+Agora falando sobre os 3 artigos que abordam o tema de funções implicitas para reconstrução de objetos 3d usando nuvens de pontos, o primeiro é o funk et al de 2013
+...
+Então basicamente o que o artigo propoe, um método para reconstrução 3D a partir de nuvens de pontos "imprecisas", ou seja, com ruído, outliers e falhas (buracos). A principal característica da abordagem é a combinação de técnicas de aproximação esparsa com renderização de superfícies.
+resultados ...
+
+o próximo trabalho é o do Yang et al de 2007
+...
+Este artigo também foca na reconstrução de superfícies a partir de nuvens de pontos com ruído e outliers, mas utiliza uma abordagem diferente do primeiro. O método é um pipeline de dois estágios principais:
+Filtragem com Mean Shift: onde ele limpa qualquer ruido e agrupa os outlier.
+Reconstrução com RBF e Partição da Unidade: onde ele subdivide o espaço e para cada subespaço é construida uma função RBF e em seguida
+é feito a junção dessas funções RBF's e construida a superficie global 
+resultados ...
+
+e o ultimo trabalho é o Beale et al de 2006
+...
+Este artigo aborda um problema mais específico: o ajuste de 
+superfícies quádricas (como esferas, elipsoides, cilindros, etc.) a nuvens de pontos, especialmente quando os dados são escassos, incompletos ou ruidosos.
+A principal inovação é o uso de uma abordagem Bayesiana.
+Em vez de apenas tentar encontrar a melhor quádrica que se ajusta aos pontos, o método permite incorporar um "prior", que mesmo que tenha poucos dados ele ainda consegue inferir a forma correta por esse Bayesiana.
+resultados ...
+
+slide 4 
+Outra técnica usada para reconstrução 3d são as baseadas em deep learning
+prin...
+func...
+
+slide 5
+...
+Sobre O artigo de Sharma et al 2021
+Este artigo foca em melhorar a qualidade de nuvens de pontos que são esparsas (com poucos pontos) e ruidosas, que são típicas de scanners 3D.
+Basicamente constroi Uma nuvem de pontos mais densa, completa e suave, com normais precisas, que leva a uma reconstrução de superfície 3D muito superior em comparação com outros métodos que apenas aumentam a densidade dos pontos.
+...
+
+O segundo artigo é o Li et al 2019
+...
+Este artigo aborda o problema da baixa qualidade das imagens de profundidade capturadas por câmeras RGB-D de baixo custo (como o Kinect), que são tipicamente de baixa resolução, ruidosas e com "buracos" (áreas sem informação).
+O resultado desse artigo é a obtenção de Uma imagem de profundidade de alta qualidade que, ao ser usada em sistemas de reconstrução 3D volumétricos (como o KinectFusion), produz modelos 3D muito mais precisos e detalhados do que se fossem usados os dados brutos da câmera.
+...
+ 
+O terceiro artigo é o kanda de 2022
+...
+Este artigo foca na reconstrução 3D de edifícios simples (com base retangular e telhados padrão, como de duas ou quatro águas) a partir de nuvens de pontos de varredura a laser.
+o resultado foi a obtenção de umA rede neural que fornece automaticamente os parâmetros geométricos (principalmente as inclinações das faces do telhado) que, combinados com a planta baixa do edifício, permitem construir um modelo 3D poligonal limpo e preciso usando modelagem por semi-espaços (half-space modelling).
+...
+
+----------------------------------------------------------------------------------
+slide 1
+Sobre funções implicitas
+principio...
+funcionamento...
+Basicamente o que ele está dizendo é, vc tem a nuvem de pontos e consegue encontrar a supercifie que desenha o objeto porque a superficie passa em cima ou proximo dos pontos onde a função zera.
+exemplos...
+
+slide 2
+Aqui são alguns exemplos da função implicita.
+
+-- img1 
+A mais conhecida entre nós que a função da esfera ...
+
+-- img 2
+E aqui ao lado as nuvens de pontos e a reconstrução do objeto utilizando a função implicita encontrada com a nuvens de pontos.
+
+slide 3
+Agora sobre os artigos que escolhemos.
+O artigo de Funk et al de 2013, apresenta um método para modelar cenas (especialmente ambientes internos, como corredores) a partir de nuvens de pontos muito imprecisas, com ruído forte, outliers e grandes buracos, típicas de sensores de baixo custo.
+
+O segundo artigo é o de Yang et al de 2013, apresenta um método em duas etapas para reconstruir superfícies a partir de nuvens de pontos com muito ruído e outliers. A estratégia é: primeiro limpar os dados, depois reconstruir.
+
+E o terceiro artigo é o de Baele de 2016, onde ele foca em um problema específico: como ajustar uma superfície quádrica (como esferas, elipsoides, cilindros) a uma nuvem de pontos quando há poucos dados disponíveis, tornando a forma ambígua. Basicamente com as nuvens de pontos voce não sabe se é uma esfera ou uma elipsoides.
+
+ Nesta tabela, vemos que a grande força do método é sua capacidade de lidar com dados imperfeitos, os 3 artigos utilizam funções implicitas para tentar encontrar ou suavizar um objeto 3d com poucos pontos de nuvem.
+
+slide 4
+Por fim, temos os métodos baseados em Deep Learning. A grande mudança aqui é que, em vez de usarmos algoritmos com regras fixas, nós treinamos uma rede neural com milhares de exemplos . Ela 'aprende' a identificar padrões e a reconstruir formas sozinha. 
+Princi...
+Funci...
+Como vemos nas imagens de Sharma et al., até mesmo melhorar a própria nuvem de pontos, tornando-a mais densa e precisa.
+
+slide 5
+Os métodos de Deep Learning são altamente especializados, e a tabela mostra isso claramente.
+O ponto mais importante a se notar aqui é que cada rede foi projetada para uma tarefa muito específica. 
+
+Sharma et al. focam em melhorar a qualidade da nuvem (upsampling). 
+
+Li et al. trabalham com imagens de profundidade de câmeras de baixo custo, aumentando sua resolução.
+
+Kada foca em uma aplicação de nicho: a reconstrução de telhados de edifícios.
+
+A Limitação universal, como vemos na tabela, é a dependência da base de dados de treinamento. O desempenho da rede está diretamente ligado à qualidade e à variedade dos dados que ela 'viu'. Se um objeto for muito diferente do que foi usado no treinamento, a reconstrução pode falhar.
+
+slide 6
+Aqui são os pontos especificos de cada método detalhado completamente, porem vou ser mais direto para podemos ficar dentro do tempo.
+
+slide 7
+nosso estudo mostra que cada abordagem tem seu ponto forte . A Triangulação é ideal para dados limpos e densos. O método Volumétrico é perfeito para criar modelos completos e sem furos, mesmo com dados ruins, mas a um alto custo. As Funções Implícitas são excelentes para gerar superfícies suaves a partir de dados com ruído. E o Deep Learning é extremamente poderoso e adaptável, desde que se tenha dados de treinamento adequados.

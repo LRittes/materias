@@ -1,0 +1,4 @@
+Thread 1 - Itens processados: 2 - Total de bytes: 60 - Média: 30.00 bytes/item
+Thread 2 - Itens processados: 2 - Total de bytes: 41 - Média: 20.50 bytes/item
+Thread 3 - Itens processados: 3 - Total de bytes: 109 - Média: 36.33 bytes/item
+Thread 4 - Itens processados: 4 - Total de bytes: 126 - Média: 31.50 bytes/item

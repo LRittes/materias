@@ -1,0 +1,151 @@
+SELECT * from departamento
+SELECT * from dependente
+SELECT * from depto_localizacoes
+SELECT * from empregado
+SELECT * from projeto
+SELECT * from trabalha_em
+
+
+
+CREATE OR REPLACE FUNCTION calcular_salario_com_acrescimo(dep_num INTEGER)
+RETURNS TABLE(nome_empregado VARCHAR, salario_original INTEGER, salario_ajustado NUMERIC) AS $$
+DECLARE
+    emp_record RECORD;
+    num_dependentes INTEGER;
+    acrescimo NUMERIC;
+BEGIN
+    FOR emp_record IN 
+        SELECT e.pnome || ' ' || e.unome AS nome, e.ssn, e.salario
+        FROM empregado e
+        WHERE e.dno = dep_num
+    LOOP
+        -- Conta o número de dependentes do tipo 'FILHO' ou 'FILHA'
+        SELECT COUNT(*) INTO num_dependentes
+        FROM dependente d
+        WHERE d.essn = emp_record.ssn AND (d.parentesco = 'FILHO' OR d.parentesco = 'FILHA');
+        
+        -- Calcula o acréscimo (2% para cada filho/filha)
+        acrescimo := num_dependentes * 0.02;
+        
+        -- Retorna os dados
+        nome_empregado := emp_record.nome;
+        salario_original := emp_record.salario;
+        salario_ajustado := emp_record.salario * (1 + acrescimo);
+        
+        RETURN NEXT;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT calcular_salario_com_acrescimo(5)
+
+CREATE OR REPLACE FUNCTION calcular_horas_por_projetos(dep_num INTEGER)
+RETURNS NUMERIC AS $$
+DECLARE
+    soma_horas NUMERIC := 0;
+    qtd_projetos INTEGER;
+    resultado NUMERIC;
+BEGIN
+    -- Calcula a soma das horas trabalhadas pelos empregados do departamento
+    SELECT COALESCE(SUM(t.horas), 0) INTO soma_horas
+    FROM empregado e
+    JOIN trabalha_em t ON e.ssn = t.essn
+    WHERE e.dno = dep_num;
+    
+    -- Conta a quantidade de projetos do departamento
+    SELECT COUNT(*) INTO qtd_projetos
+    FROM projeto p
+    WHERE p.dnum = dep_num;
+    
+    -- Calcula o resultado final
+    resultado := soma_horas * qtd_projetos;
+    
+    RETURN resultado;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT calcular_horas_por_projetos(5)
+
+CREATE OR REPLACE FUNCTION empregados_acima_media_alocacao(dep_num INTEGER)
+RETURNS SETOF VARCHAR AS $$
+DECLARE
+    media_global NUMERIC;
+BEGIN
+    -- Calcula a média global de horas trabalhadas em projetos
+    SELECT AVG(horas) INTO media_global
+    FROM trabalha_em
+    WHERE horas IS NOT NULL;
+    
+    -- Retorna os nomes dos empregados que trabalham em projetos do departamento
+    -- específico e têm média de horas superior à média global
+    RETURN QUERY
+    SELECT (e.pnome || ' ' || e.unome)::VARCHAR
+    FROM empregado e
+    JOIN trabalha_em t ON e.ssn = t.essn
+    JOIN projeto p ON t.pno = p.pnumero
+    WHERE p.dnum = dep_num
+    GROUP BY e.ssn, e.pnome, e.unome
+    HAVING AVG(t.horas) > media_global;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT empregados_acima_media_alocacao(4)
+
+CREATE OR REPLACE FUNCTION verificar_autosupervisao()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.ssn = NEW.superssn THEN
+        RAISE EXCEPTION 'Um empregado não pode ser supervisionado por ele mesmo';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER impedir_autosupervisao
+BEFORE INSERT OR UPDATE ON empregado
+FOR EACH ROW
+EXECUTE FUNCTION verificar_autosupervisao();
+
+-- Tentativa de inserir um empregado que é supervisionado por ele mesmo
+INSERT INTO empregado 
+VALUES ('Robert', 'K', 'Johnson', '111222333', '1980-03-15', '123 Main St, Houston, TX', 'M', 35000, '111222333', 5);
+
+-- Alternativa: tentar atualizar um empregado existente para ser supervisionado por ele mesmo
+UPDATE empregado
+SET superssn = '123456789'
+WHERE ssn = '123456789';
+
+CREATE OR REPLACE FUNCTION verificar_conjuge_unico()
+RETURNS TRIGGER AS $$
+DECLARE
+    qtd_conjuges INTEGER;
+BEGIN
+    -- Conta quantos cônjuges o empregado terá após a inserção/atualização
+    IF TG_OP = 'INSERT' OR (TG_OP = 'UPDATE' AND NEW.parentesco = 'CÔNJUGE') THEN
+        SELECT COUNT(*) INTO qtd_conjuges
+        FROM dependente
+        WHERE essn = NEW.essn AND parentesco = 'CÔNJUGE'
+        AND (TG_OP = 'INSERT' OR nome_dependente <> NEW.nome_dependente);
+        
+        IF qtd_conjuges > 0 THEN
+            RAISE EXCEPTION 'Um empregado não pode ter mais de um cônjuge';
+        END IF;
+    END IF;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER impedir_multiplos_conjuges
+BEFORE INSERT OR UPDATE ON dependente
+FOR EACH ROW
+EXECUTE FUNCTION verificar_conjuge_unico();
+
+-- Tentativa de inserir um segundo cônjuge para o mesmo empregado
+INSERT INTO dependente 
+VALUES ('123456789', 'Sarah', 'F', '1970-04-18', 'CÔNJUGE');
+
+-- Alternativa: tentar atualizar um dependente existente para ser um segundo cônjuge
+UPDATE dependente
+SET parentesco = 'CÔNJUGE'
+WHERE essn = '123456789' AND nome_dependente = 'Alice';

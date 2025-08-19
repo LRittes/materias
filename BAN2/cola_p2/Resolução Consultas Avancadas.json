@@ -1,0 +1,394 @@
+    //1) Recupere o CPF e o nome dos mecânicos que trabalham nos setores número 1 e 2 (faça a consulta utilizando a cláusula IN).
+db.mecanico.find(
+  {"cods": {"$in": [1, 2]}}, 
+  {"cpf": 1, "nome": 1, "_id": 0}
+)
+
+//2) Recupere o CPF e o nome dos mecânicos que trabalham nos setores 'Funilaria' e 'Pintura' (faça a consulta utilizando sub-consultas aninhadas).
+db.mecanico.find(
+  {
+    "cods": {
+      "$in": db.setor.find(
+        {"nome": {"$in": ["Funilaria", "Pintura"]}}, 
+        {"cods": 1}
+      ).map(function(doc) { return doc.cods; })
+    }
+  }, 
+  {"cpf": 1, "nome": 1, "_id": 0}
+)
+
+//Alternativa usando agregação (mais eficiente):
+
+db.mecanico.aggregate([
+  {
+    "$lookup": {
+      "from": "setor",
+      "localField": "cods",
+      "foreignField": "cods",
+      "as": "setor_info"
+    }
+  },
+  {
+    "$unwind": "$setor_info"
+  },
+  {
+    "$match": {
+      "setor_info.nome": {"$in": ["Funilaria", "Pintura"]}
+    }
+  },
+  {
+    "$project": {
+      "cpf": 1,
+      "nome": 1,
+      "_id": 0
+    }
+  }
+])
+
+//3) Recupere o CPF e nome dos mecânicos que atenderam no dia 13/06/2014 (faça a consulta usando INNER JOIN).
+db.conserto.aggregate([
+  {
+    "$match": {
+      "data": "2014-06-13"
+    }
+  },
+  {
+    "$lookup": {
+      "from": "mecanico",
+      "localField": "codm",
+      "foreignField": "codm",
+      "as": "mecanico_info"
+    }
+  },
+  {
+    "$unwind": "$mecanico_info"
+  },
+  {
+    "$group": {
+      "_id": "$mecanico_info.codm",
+      "cpf": {"$first": "$mecanico_info.cpf"},
+      "nome": {"$first": "$mecanico_info.nome"}
+    }
+  },
+  {
+    "$project": {
+      "cpf": 1,
+      "nome": 1,
+      "_id": 0
+    }
+  }
+])
+
+//4) Recupere o nome do mecânico, o nome do cliente e a hora do conserto para os consertos realizados no dia 12/06/2014 (faça a consulta usando INNER JOIN).
+db.conserto.aggregate([
+  {
+    "$match": {
+      "data": "2014-06-12"
+    }
+  },
+  {
+    "$lookup": {
+      "from": "mecanico",
+      "localField": "codm",
+      "foreignField": "codm",
+      "as": "mecanico_info"
+    }
+  },
+  {
+    "$lookup": {
+      "from": "veiculo",
+      "localField": "codv",
+      "foreignField": "codv",
+      "as": "veiculo_info"
+    }
+  },
+  {
+    "$unwind": "$mecanico_info"
+  },
+  {
+    "$unwind": "$veiculo_info"
+  },
+  {
+    "$lookup": {
+      "from": "cliente",
+      "localField": "veiculo_info.codc",
+      "foreignField": "codc",
+      "as": "cliente_info"
+    }
+  },
+  {
+    "$unwind": "$cliente_info"
+  },
+  {
+    "$project": {
+      "nome_mecanico": "$mecanico_info.nome",
+      "nome_cliente": "$cliente_info.nome",
+      "hora": 1,
+      "_id": 0
+    }
+  }
+])
+
+//5) Recupere o nome e a função de todos os mecânicos, e o número e o nome dos setores para os mecânicos que tenham essa informação.
+db.mecanico.aggregate([
+  {
+    "$lookup": {
+      "from": "setor",
+      "localField": "cods",
+      "foreignField": "cods",
+      "as": "setor_info"
+    }
+  },
+  {
+    "$unwind": {
+      "path": "$setor_info",
+      "preserveNullAndEmptyArrays": true
+    }
+  },
+  {
+    "$project": {
+      "nome": 1,
+      "funcao": 1,
+      "numero_setor": "$setor_info.cods",
+      "nome_setor": "$setor_info.nome",
+      "_id": 0
+    }
+  }
+])
+
+//6) Recupere o nome de todos os mecânicos, e as datas dos consertos para os mecânicos que têm consertos feitos (deve aparecer apenas um registro de nome de mecânico para cada data de conserto).
+db.mecanico.aggregate([
+  {
+    "$lookup": {
+      "from": "conserto",
+      "localField": "codm",
+      "foreignField": "codm",
+      "as": "consertos"
+    }
+  },
+  {
+    "$unwind": {
+      "path": "$consertos",
+      "preserveNullAndEmptyArrays": true
+    }
+  },
+  {
+    "$group": {
+      "_id": {
+        "nome": "$nome",
+        "data": "$consertos.data"
+      }
+    }
+  },
+  {
+    "$match": {
+      "_id.data": {"$ne": null}
+    }
+  },
+  {
+    "$project": {
+      "nome": "$_id.nome",
+      "data": "$_id.data",
+      "_id": 0
+    }
+  },
+  {
+    "$sort": {
+      "nome": 1,
+      "data": 1
+    }
+  }
+])
+
+//7) Recupere a média da quilometragem de todos os veículos dos clientes.
+db.veiculo.aggregate([
+  {
+    "$group": {
+      "_id": null,
+      "media_quilometragem": {"$avg": "$quilometragem"}
+    }
+  },
+  {
+    "$project": {
+      "media_quilometragem": 1,
+      "_id": 0
+    }
+  }
+])
+
+//8) Recupere a soma da quilometragem dos veículos de cada cidade onde residem seus proprietários.
+db.veiculo.aggregate([
+  {
+    "$lookup": {
+      "from": "cliente",
+      "localField": "codc",
+      "foreignField": "codc",
+      "as": "cliente_info"
+    }
+  },
+  {
+    "$unwind": "$cliente_info"
+  },
+  {
+    "$group": {
+      "_id": "$cliente_info.cidade",
+      "soma_quilometragem": {"$sum": "$quilometragem"}
+    }
+  },
+  {
+    "$project": {
+      "cidade": "$_id",
+      "soma_quilometragem": 1,
+      "_id": 0
+    }
+  }
+])
+
+//9) Recupere a quantidade de consertos feitos por cada mecânico durante o período de 12/06/2014 até 19/06/2014.
+db.conserto.aggregate([
+  {
+    "$match": {
+      "data": {
+        "$gte": "2014-06-12",
+        "$lte": "2014-06-19"
+      }
+    }
+  },
+  {
+    "$lookup": {
+      "from": "mecanico",
+      "localField": "codm",
+      "foreignField": "codm",
+      "as": "mecanico_info"
+    }
+  },
+  {
+    "$unwind": "$mecanico_info"
+  },
+  {
+    "$group": {
+      "_id": "$codm",
+      "nome_mecanico": {"$first": "$mecanico_info.nome"},
+      "quantidade_consertos": {"$sum": 1}
+    }
+  },
+  {
+    "$project": {
+      "nome_mecanico": 1,
+      "quantidade_consertos": 1,
+      "_id": 0
+    }
+  }
+])
+
+//10) Recupere a quantidade de consertos feitos agrupada pela marca do veículo.
+db.conserto.aggregate([
+  {
+    "$lookup": {
+      "from": "veiculo",
+      "localField": "codv",
+      "foreignField": "codv",
+      "as": "veiculo_info"
+    }
+  },
+  {
+    "$unwind": "$veiculo_info"
+  },
+  {
+    "$group": {
+      "_id": "$veiculo_info.marca",
+      "quantidade_consertos": {"$sum": 1}
+    }
+  },
+  {
+    "$project": {
+      "marca": "$_id",
+      "quantidade_consertos": 1,
+      "_id": 0
+    }
+  }
+])
+
+//11) Recupere o modelo, a marca e o ano dos veículos que têm quilometragem maior que a média de quilometragem de todos os veículos.
+Copy// Primeiro calcular a média
+var media = db.veiculo.aggregate([
+  {
+    "$group": {
+      "_id": null,
+      "media_quilometragem": {"$avg": "$quilometragem"}
+    }
+  }
+]).toArray()[0].media_quilometragem;
+
+// Depois usar a média na consulta
+db.veiculo.find(
+  {"quilometragem": {"$gt": media}},
+  {"modelo": 1, "marca": 1, "ano": 1, "_id": 0}
+)
+//Alternativa usando apenas agregação:
+
+db.veiculo.aggregate([
+  {
+    "$group": {
+      "_id": null,
+      "media_quilometragem": {"$avg": "$quilometragem"},
+      "veiculos": {"$push": "$$ROOT"}
+    }
+  },
+  {
+    "$unwind": "$veiculos"
+  },
+  {
+    "$match": {
+      "$expr": {"$gt": ["$veiculos.quilometragem", "$media_quilometragem"]}
+    }
+  },
+  {
+    "$project": {
+      "modelo": "$veiculos.modelo",
+      "marca": "$veiculos.marca",
+      "ano": "$veiculos.ano",
+      "_id": 0
+    }
+  }
+])
+
+//12) Recupere o nome dos mecânicos que têm mais de um conserto marcado para o mesmo dia.
+db.conserto.aggregate([
+  {
+    "$group": {
+      "_id": {
+        "codm": "$codm",
+        "data": "$data"
+      },
+      "quantidade": {"$sum": 1}
+    }
+  },
+  {
+    "$match": {
+      "quantidade": {"$gt": 1}
+    }
+  },
+  {
+    "$lookup": {
+      "from": "mecanico",
+      "localField": "_id.codm",
+      "foreignField": "codm",
+      "as": "mecanico_info"
+    }
+  },
+  {
+    "$unwind": "$mecanico_info"
+  },
+  {
+    "$group": {
+      "_id": "$mecanico_info.nome"
+    }
+  },
+  {
+    "$project": {
+      "nome": "$_id",
+      "_id": 0
+    }
+  }
+])

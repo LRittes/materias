@@ -1,0 +1,300 @@
+// Coleção: setor
+[
+  {
+    "_id": 1,
+    "cods": 1,
+    "nome": "Elétrica"
+  },
+  {
+    "_id": 2,
+    "cods": 2,
+    "nome": "Mecânica"
+  },
+  {
+    "_id": 3,
+    "cods": 3,
+    "nome": "Funilaria"
+  },
+  {
+    "_id": 4,
+    "cods": 4,
+    "nome": "Pintura"
+  }
+]
+
+
+//Coleção: mecanico
+[
+  {
+    "_id": 1,
+    "codm": 1,
+    "cpf": "10000100000",
+    "nome": "João",
+    "idade": 40,
+    "endereco": "América",
+    "cidade": "Joinville",
+    "funcao": "som",
+    "cods": 1
+  },
+  {
+    "_id": 2,
+    "codm": 2,
+    "cpf": "10000110000",
+    "nome": "Luiz",
+    "idade": 42,
+    "endereco": "Vila Nova",
+    "cidade": "Joinville",
+    "funcao": "motor",
+    "cods": 2
+  },
+  {
+    "_id": 3,
+    "codm": 3,
+    "cpf": "11000100000",
+    "nome": "Pedro",
+    "idade": 51,
+    "endereco": "Cobrasol",
+    "cidade": "São José",
+    "funcao": "câmbio",
+    "cods": 2
+  },
+  {
+    "_id": 4,
+    "codm": 4,
+    "cpf": "11000110000",
+    "nome": "Carlos",
+    "idade": 28,
+    "endereco": "Trindade",
+    "cidade": "Florianópolis",
+    "funcao": "estofado",
+    "cods": null
+  },
+  {
+    "_id": 5,
+    "codm": 5,
+    "cpf": "11000111000",
+    "nome": "Márcio",
+    "idade": 33,
+    "endereco": "Pantanal",
+    "cidade": "Florianópolis",
+    "funcao": "desamassa",
+    "cods": 3
+  }
+]
+
+
+//Coleção: cliente
+[
+  {
+    "_id": 1,
+    "codc": 1,
+    "cpf": "20000200000",
+    "nome": "Ana",
+    "idade": 20,
+    "endereco": "América",
+    "cidade": "Joinville"
+  },
+  {
+    "_id": 2,
+    "codc": 2,
+    "cpf": "20000220000",
+    "nome": "Paulo",
+    "idade": 24,
+    "endereco": "Saguaçú",
+    "cidade": "Joinville"
+  },
+  {
+    "_id": 3,
+    "codc": 3,
+    "cpf": "22000200000",
+    "nome": "Lucia",
+    "idade": 30,
+    "endereco": "Vila Nova",
+    "cidade": "Joinville"
+  },
+  {
+    "_id": 4,
+    "codc": 4,
+    "cpf": "11000110000",
+    "nome": "Carlos",
+    "idade": 28,
+    "endereco": "Trindade",
+    "cidade": "Florianópolis"
+  },
+  {
+    "_id": 5,
+    "codc": 5,
+    "cpf": "51000110000",
+    "nome": "Carlos",
+    "idade": 44,
+    "endereco": "Centro",
+    "cidade": "Florianópolis"
+  },
+  {
+    "_id": 6,
+    "codc": 6,
+    "cpf": "71000111000",
+    "nome": "João",
+    "idade": 38,
+    "endereco": "Praia Comprida",
+    "cidade": "São José"
+  },
+  {
+    "_id": 7,
+    "codc": 7,
+    "cpf": "10000110000",
+    "nome": "Luiz",
+    "idade": 42,
+    "endereco": "Vila Nova",
+    "cidade": "Joinville"
+  }
+]
+
+
+//Coleção: veiculo
+[
+  {
+    "_id": 1,
+    "codv": 1,
+    "renavam": "2000010000",
+    "modelo": "Ka",
+    "marca": "Ford",
+    "ano": 2013,
+    "quilometragem": 1200.3,
+    "codc": 1
+  },
+  {
+    "_id": 2,
+    "codv": 2,
+    "renavam": "3000011000",
+    "modelo": "Celta",
+    "marca": "GM",
+    "ano": 2014,
+    "quilometragem": 1220.8,
+    "codc": 2
+  },
+  {
+    "_id": 3,
+    "codv": 3,
+    "renavam": "4100010000",
+    "modelo": "Palio",
+    "marca": "Fiat",
+    "ano": 2012,
+    "quilometragem": 51000.2,
+    "codc": 3
+  },
+  {
+    "_id": 4,
+    "codv": 4,
+    "renavam": "5100011000",
+    "modelo": "C3",
+    "marca": "Citroen",
+    "ano": 2015,
+    "quilometragem": 5000.7,
+    "codc": 4
+  },
+  {
+    "_id": 5,
+    "codv": 5,
+    "renavam": "6100011100",
+    "modelo": "Fox",
+    "marca": "VW",
+    "ano": 2011,
+    "quilometragem": 79000.9,
+    "codc": 5
+  },
+  {
+    "_id": 6,
+    "codv": 6,
+    "renavam": "7100011100",
+    "modelo": "Palio",
+    "marca": "Fiat",
+    "ano": 2010,
+    "quilometragem": 110000.45,
+    "codc": 6
+  },
+  {
+    "_id": 7,
+    "codv": 7,
+    "renavam": "7100011111",
+    "modelo": "Gol",
+    "marca": "VW",
+    "ano": 2009,
+    "quilometragem": 130000.5,
+    "codc": 7
+  }
+]
+
+//Coleção: conserto
+[
+  {
+    "_id": 1,
+    "codm": 1,
+    "codv": 1,
+    "data": "2014-06-12",
+    "hora": "14:00"
+  },
+  {
+    "_id": 2,
+    "codm": 1,
+    "codv": 4,
+    "data": "2014-06-13",
+    "hora": "10:00"
+  },
+  {
+    "_id": 3,
+    "codm": 2,
+    "codv": 1,
+    "data": "2014-06-13",
+    "hora": "09:00"
+  },
+  {
+    "_id": 4,
+    "codm": 2,
+    "codv": 2,
+    "data": "2014-06-13",
+    "hora": "11:00"
+  },
+  {
+    "_id": 5,
+    "codm": 2,
+    "codv": 3,
+    "data": "2014-06-14",
+    "hora": "14:00"
+  },
+  {
+    "_id": 6,
+    "codm": 2,
+    "codv": 4,
+    "data": "2014-06-14",
+    "hora": "17:00"
+  },
+  {
+    "_id": 7,
+    "codm": 3,
+    "codv": 1,
+    "data": "2014-06-19",
+    "hora": "18:00"
+  },
+  {
+    "_id": 8,
+    "codm": 3,
+    "codv": 3,
+    "data": "2014-06-12",
+    "hora": "10:00"
+  },
+  {
+    "_id": 9,
+    "codm": 3,
+    "codv": 4,
+    "data": "2014-06-19",
+    "hora": "13:00"
+  },
+  {
+    "_id": 10,
+    "codm": 4,
+    "codv": 4,
+    "data": "2014-06-20",
+    "hora": "13:00"
+  }
+]

@@ -1,0 +1,36 @@
+INSERT INTO servico_extra (descricao, preco) VALUES ('Entrega de refeições/bebidas', 25.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Limpeza extra', 35.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Troca de roupa de cama', 15.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Toalhas extras', 10.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Produtos de higiene', 12.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Jornal/revista', 8.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Serviço de despertador', 5.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Lavanderia expressa', 40.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Ferro e tábua de passar', 20.00);
+INSERT INTO servico_extra (descricao, preco) VALUES ('Amenities de banho', 18.00);
+
+INSERT INTO tipo_quarto (hotel_id, plano, tp_quarto, preco_noite) VALUES
+(1, 'standard', 'single', 120.00),
+(1, 'standard', 'duplo', 180.00),
+(1, 'standard', 'casal', 200.00),
+(1, 'standard', 'suite_master', 300.00),
+(1, 'vip', 'single', 250.00),
+(1, 'vip', 'duplo', 350.00),
+(1, 'vip', 'casal', 400.00),
+(1, 'vip', 'suite_master', 600.00),
+(1, 'luxo', 'single', 450.00),
+(1, 'luxo', 'duplo', 650.00),
+(1, 'luxo', 'casal', 750.00),
+(1, 'luxo', 'suite_master', 1200.00),
+(1, 'presidencial', 'single', 800.00),
+(1, 'presidencial', 'duplo', 1200.00),
+(1, 'presidencial', 'casal', 1500.00),
+(1, 'presidencial', 'suite_master', 2500.00);
+
+select * from servico_extra
+select * from servico_estadia
+select * from tipo_quarto
+select * from roombyhotelid(1)
+	
+	select * from reserva r where r.cliente_id = 6
+select * from reserva

@@ -1,0 +1,11 @@
+:: The Student's Guide to the Secret Art of Debugging (Norm Matloff)
+	Tutorial de como depurar programas no Linux usando GDB e DDD.
+	Clique o link http://heather.cs.ucdavis.edu/~matloff/debug.html para abrir o recurso
+
+:: Programming Tools (FreeBSD Developers' Handbook)
+	Um tutorial curto de como usar as principais ferramentas de desenvolvimento C no FreeBSD, aplicável a outros sistemas Unix-like.
+	Clique o link http://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook/tools.html para abrir o recurso
+
+:: Debugging (Patrick Horgan)
+	Tutoriais de como depurar programas C usando o GDB e descendo ao nível de linguagem Assembly.	
+	Clique o link http://dbp-consulting.com/tutorials/debugging/index.html para abrir o recurso

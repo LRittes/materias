@@ -1,0 +1,3 @@
+:: Below C Level: An Introduction to Computer Systems (Norm Matloff)
+	Livro online que apresenta os fundamentos de sistemas computacionais, incluindo funcionamento da CPU, organização da memória e programação Assembly na arquitetura Intel.
+	Clique o link http://heather.cs.ucdavis.edu/~matloff/50/PLN/CompSystsBook.pdf para abrir o recurso

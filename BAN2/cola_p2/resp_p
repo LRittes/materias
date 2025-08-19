@@ -1,0 +1,65 @@
+a. Consulta para recuperar o ssn, pnome e unome dos empregados que ganham salário menor que
+45000.
+db.empregado.find({salario: {$lt: 45000}})
+
+b. Consulta para recuperar os empregados e a quantidade de horas trabalhadas por cada um deles como
+um agregado, para os empregados do departamento 5.
+db.empregado.aggregate({$match: {dno: 5}}, {$lookup: {from: "trabalha_em", localField: "_id", foreignField: "essn", as: "ite"}}, {$addFields: {"horas": {$sum: "$ite.horas"}}}, {$project: {ite:0}})
+
+c. Consulta para recuperar a soma da quantidade de horas trabalhadas pelos empregados em cada
+projeto que tenha pno maior que 5.
+db.empregado.aggregate({$lookup: {from: "trabalha_em", localField: "_id", foreignField: "essn", as: "ite"}}, {$addFields: {ite: {$filter: {input: "$ite", as: "item", cond: {$gt: ["$$item.pno", 5]}}}}}, {$addFields: {horas: {$sum: "$ite.horas"}}}, {$match: {horas: {$gt: 0}}}, {$project: {ite:0, horas:0}})
+
+c2. Consulta para recuperar a quantidade média de horas trabalhadas pelos empregados agrupadas por
+departamento.
+db.empregado.aggregate({$lookup: {from: "departamento", localField: "dno", foreignField: "_id", as: "dep"}}, {$unwind: "$dep"}, {$lookup: {from: "trabalha_em", localField: "_id", foreignField: "essn", as: "trab"}}, {$addFields: {horas: {$sum: "$trab.horas"}}}, {$group: {"_id": "$dep.dnome", horas: {$avg: "$horas"}}})
+
+d. Consulta para recuperar os departamentos e seus respectivos empregados como agregados dos
+departamentos. Ordene o resultado pelo nome do departamento (campo dnome).
+db.departamento.aggregate({$lookup: {from: "empregado", localField: "_id", foreignField: "dno", as: "empregados"}}, {$sort: {dnome: 1}})
+
+S1: r1(X); r2(Z); r3(X); r4(Y); w2(Z); w4(Y); r2(Y); r1(Z); w2(Y); r3(Y); w1(X); w1(Z); r4(Z); w3(Y); w4(Z);
+t1   t2   t3   t4
+r(x) 
+     r(z)
+          r(x)
+               r(y)
+r(z)
+               w(y)
+     r(y)
+               r(z)
+          r(y)
+w(x)
+w(z) 
+     w(z)
+          w(y)
+               w(z)
+     w(y)
+
+
+r3(x) -> w1(x)
+w4(Y) -> r2(Y)
+w4(Y) -> r3(Y)
+r2(Y) -> w3(Y)
+r3(Y) -> w2(Y)
+w3(Y) -> W2(Y)
+r2(Z) -> w1(Z)
+r2(Z) -> w4(Z)
+r4(Z) -> w1(Z)
+r4(Z) -> w2(Z)
+w1(Z) -> w2(Z)
+w1(Z) -> w4(Z)
+w2(Z) -> w4(Z)
+
+T3 -> T1
+T4 -> T2
+T4 -> T3
+T2 -> T3
+T3 -> T2
+T2 -> T1
+T2 -> T4
+T4 -> T1
+T4 -> T2
+T1 -> T2
+T1 -> T4
+T2 -> T4

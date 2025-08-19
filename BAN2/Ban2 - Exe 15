@@ -1,0 +1,86 @@
+CREATE TYPE nome_completo AS (
+    pai_nome VARCHAR(100),
+    mae_nome VARCHAR(100)
+);
+
+CREATE TYPE identificacao AS (
+    nome VARCHAR(100),
+    raca VARCHAR(50),
+    sexo CHAR(1)
+);
+
+-- Base table for inheritance hierarchy
+CREATE TABLE animal (
+    id SERIAL PRIMARY KEY,
+    identificacao identificacao NOT NULL,
+    data_resultado DATE,
+    data_descricao TEXT
+);
+
+-- Inherited tables
+CREATE TABLE veterinario (
+    crm_nome VARCHAR(20) UNIQUE NOT NULL,
+    convenio VARCHAR(100)
+) INHERITS (animal);
+
+CREATE TABLE matriz (
+    cobertura_data DATE
+) INHERITS (animal);
+
+CREATE TABLE reprodutor (
+    -- Inherits all fields from animal
+) INHERITS (animal);
+
+-- Junction table for many-to-many relationship
+CREATE TABLE adquirido (
+    animal_id INTEGER REFERENCES animal(id) ON DELETE CASCADE,
+    nome_completo nome_completo NOT NULL,
+    valor DECIMAL(10,2),
+    data_desmame DATE,
+    PRIMARY KEY (animal_id)
+);
+
+-- Create table for CRIA relationship
+CREATE TABLE cria (
+    id SERIAL PRIMARY KEY,
+    matriz_id INTEGER REFERENCES matriz(id) ON DELETE CASCADE,
+    reprodutor_id INTEGER REFERENCES reprodutor(id) ON DELETE CASCADE,
+    data_desmame DATE,
+    CONSTRAINT unique_cria UNIQUE (matriz_id, reprodutor_id)
+);
+
+-- Constraints and triggers
+ALTER TABLE veterinario 
+ADD CONSTRAINT chk_veterinario_sexo 
+CHECK ((identificacao).sexo IN ('M', 'F'));
+
+ALTER TABLE matriz 
+ADD CONSTRAINT chk_matriz_sexo 
+CHECK ((identificacao).sexo = 'F');
+
+ALTER TABLE reprodutor 
+ADD CONSTRAINT chk_reprodutor_sexo 
+CHECK ((identificacao).sexo = 'M');
+
+-- Views for easier querying
+CREATE VIEW v_animal_complete AS
+SELECT 
+    a.id,
+    (a.identificacao).nome as nome,
+    (a.identificacao).raca as raca,
+    (a.identificacao).sexo as sexo,
+    a.data_resultado,
+    a.data_descricao,
+    CASE 
+        WHEN v.id IS NOT NULL THEN 'VETERINARIO'
+        WHEN m.id IS NOT NULL THEN 'MATRIZ'
+        WHEN r.id IS NOT NULL THEN 'REPRODUTOR'
+        ELSE 'ANIMAL'
+    END as tipo_animal,
+    v.crm_nome,
+    v.convenio,
+    m.cobertura_data
+FROM animal a
+LEFT JOIN veterinario v ON a.id = v.id
+LEFT JOIN matriz m ON a.id = m.id  
+LEFT JOIN reprodutor r ON a.id = r.id;

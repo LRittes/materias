@@ -1,0 +1,14 @@
+1.1
+Um sistema de produção é uma coleção de pessoas, equipamentos e procedimentos organizados para executar as operações de fabricação de uma empresa.
+
+1.3
+Sistemas de manufatura se referem ao arranjo e operação dos elementos físicos usados ​​para fabricar um produto. Sistemas de produção incluem não apenas sistemas de manufatura, mas também pessoas, informações e procedimentos pelos quais uma empresa gerencia suas operações de manufatura.
+
+1.5
+Os sistemas de suporte à manufatura incluem várias atividades relacionadas ao design de produtos, planejamento da produção e gerenciamento de operações. As quatro funções principais são: planejamento de processo, engenharia de produção, planejamento e controle da produção e funções de negócios.
+
+1.9
+A manufatura integrada por computador (CIM) refere-se ao uso extensivo de sistemas de computador para integrar funções de design, produção e negócios para alcançar uma manufatura eficiente.
+
+1.12
+Mesmo em sistemas altamente automatizados, trabalhadores humanos ainda serão necessários para tarefas como monitoramento e manutenção de equipamentos, tomada de decisões e resolução de problemas, programação e reconfiguração de máquinas e execução de tarefas manuais difíceis de automatizar.

@@ -1,0 +1,251 @@
+1-db.cliente.find({}, { nome: 1, endereco: 1, _id: 0 })
+
+--------------------------------------------------------------------------------------------------------------------------
+2-db.mecanico.find({ cods: 2 }, { nome: 1, funcao: 1, _id: 0 })
+
+-----------------------------------------------------------------------------------------------------------------------
+3- db.mecanico.aggregate([
+{"$lookup": {
+"from": "cliente",
+"localField": "cpf",
+"foreignField": "cpf",
+"as": "Clientes"
+}},
+{"$match": {
+"Clientes": {"$ne": []}
+}},
+{
+"$project": {
+"cpf": 1,
+"nome": 1,
+"_id": 0
+}
+
+}
+]
+)
+
+-----------------------------------------------------------------------------------------------------------------
+4-db.mecanico.aggregate([
+  {
+    "$group": {"_id": "$cidade"}
+  },
+  {
+    "$unionWith": {
+      "coll": "cliente",
+      "pipeline": [
+        {"$group":
+          {"_id": "$cidade"}
+        }]
+    }
+  },
+  {
+    "$group":{
+      "_id": "$_id"
+    }
+  }
+  ])
+  
+  -------------------------------------------------------------------------------------------------------------------
+  5-db.cliente.aggregate([
+  {
+    $match: { cidade: "Joinville" }  
+  },
+  {
+    $lookup: {
+      from: "veiculo",           
+      localField: "codc",        
+      foreignField: "codc",      
+      as: "veiculos"             
+    }
+  },
+  {
+    $unwind: "$veiculos"          
+  {
+    $group: {
+      _id: null,                         
+      marcas: { $addToSet: "$veiculos.marca" }  
+    }
+  }
+])
+
+----------------------------------------------------------------------------------------------------------
+6-db.mecanico.aggregate([
+  {
+    $group: {
+      _id: "$funcao"  
+    }
+  },
+  {
+    $project: {
+      _id: 0,    
+      funcao: "$_id"  
+    }
+  }
+])
+-------------------------------------------------------------------------------------------------------------
+7-db.cliente.find({
+  idade: { $gt: 25 }  
+
+----------------------------------------------------------------------------------------------------------------
+8-db.mecanico.aggregate([
+  {
+    $match: { cods: 2 }  
+  },
+  {
+    $project: {
+      _id: 0,      
+      cpf: 1,      
+      nome: 1      
+    }
+  }
+])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+9-db.conserto.aggregate([
+  {
+    $match: { data: "2014-06-13" }  
+  },
+  {
+    $lookup: {
+      from: "mecanico",        
+      localField: "codm",      
+      foreignField: "codm",    
+      as: "mecanico_info"      
+    }
+  },
+  {
+    $unwind: "$mecanico_info"  
+  {
+    $project: {
+      _id: 0,            
+      cpf: "$mecanico_info.cpf",  
+      nome: "$mecanico_info.nome"  
+    }
+  }
+])
+
+------------------------------------------------------------------------------------------------------------------------------------
+10-db.conserto.aggregate([
+  {
+    $lookup: {
+      from: "cliente",           
+      localField: "codv",        
+      foreignField: "codc",      
+      as: "cliente_info"         
+    }
+  },
+  {
+    $unwind: "$cliente_info"     
+  },
+  {
+    $lookup: {
+      from: "veiculo",           
+      localField: "codv",        
+      foreignField: "codv",      
+      as: "veiculo_info"         
+    }
+  },
+  {
+    $unwind: "$veiculo_info"     
+  },
+  {
+    $lookup: {
+      from: "mecanico",          
+      localField: "codm",        
+      foreignField: "codm",      
+      as: "mecanico_info"        
+    }
+  },
+  {
+    $unwind: "$mecanico_info"    
+  },
+  {
+    $project: {
+      _id: 0,                    
+      nome_cliente: "$cliente_info.nome",      
+      modelo_veiculo: "$veiculo_info.modelo", 
+      nome_mecanico: "$mecanico_info.nome",   
+      funcao_mecanico: "$mecanico_info.funcao"  
+    }
+  }
+])
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+11-db.conserto.aggregate([
+  {
+    $match: { data: "2014-06-19" }  
+  },
+  {
+    $lookup: {
+      from: "mecanico",             
+      localField: "codm",           
+      foreignField: "codm",         
+      as: "mecanico_info"           
+    }
+  },
+  {
+    $unwind: "$mecanico_info"       
+  },
+  {
+    $lookup: {
+      from: "cliente",              
+      localField: "codv",           
+      foreignField: "codc",         
+      as: "cliente_info"            
+    }
+  },
+  {
+    $unwind: "$cliente_info"       
+  },
+  {
+    $project: {
+      _id: 0,                       
+      nome_mecanico: "$mecanico_info.nome",  
+      nome_cliente: "$cliente_info.nome",    
+      hora_conserto: "$hora"              
+    }
+  }
+])
+
+---------------------------------------------------------------------------------------------------------------------------
+12- db.conserto.aggregate([
+  {
+    $match: {
+      data: { $gte: "2014-06-12", $lte: "2014-06-14" }  // Filtra os consertos entre 12/06/2014 e 14/06/2014
+    }
+  },
+  {
+    $lookup: {
+      from: "setor",              // Junção com a coleção "setor"
+      localField: "cods",         // Campo na coleção "conserto" que se relaciona com "setor"
+      foreignField: "cods",       // Campo na coleção "setor" que se relaciona com "conserto"
+      as: "setor_info"            // Nome do campo onde os dados do setor serão armazenados
+    }
+  },
+  {
+    $unwind: "$setor_info"        // Desfaz o array "setor_info" para acessar os dados do setor
+  },
+  {
+    $project: {
+      _id: 0,                     // Exclui o campo _id
+      cods: "$setor_info.cods",   // Código do setor
+      nome: "$setor_info.nome"    // Nome do setor
+    }
+  },
+  {
+    $group: {
+      _id: { cods: "$cods", nome: "$nome" }  // Agrupa por código e nome do setor para eliminar duplicatas
+    }
+  },
+  {
+    $project: {
+      _id: 0,            // Exclui o campo _id
+      cods: "$_id.cods", // Código do setor
+      nome: "$_id.nome"  // Nome do setor
+    }
+  }
+])
+
+
+
+

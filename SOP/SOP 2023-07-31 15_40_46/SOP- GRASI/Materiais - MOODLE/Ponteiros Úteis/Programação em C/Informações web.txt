@@ -1,0 +1,3 @@
+:: Programming in C -- UNIX System Calls and Subroutines using C (David Marshall)
+	Guia de programação em C, desde aspectos básicos até tópicos avançados no ambiente UNIX.
+	Clique o link http://www.cs.cf.ac.uk/Dave/C/CE.html para abrir o recurso

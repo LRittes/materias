@@ -1,0 +1,24 @@
+:: Programming from the Ground Up (Jonathan Bartlett)
+	Livro on-line que ensina programação introdutória usando Assembly no Linux.
+	Clique o link http://savannah.nongnu.org/projects/pgubook/ para abrir o recurso
+
+:: A Guide to Programming Intel IA32 PC Architecture (Kai Li)
+	Breve descrição da arquitetura Intel IA32 e introdução a programação Assembly para essa arquitetura.
+	Clique o link http://flint.cs.yale.edu/cs422/doc/pc-arch.html para abrir o recurso
+
+:: PC Assembly Language (Paul Carter)
+	Livro online de programação Assembly para arquitetura Intel. Revisa os principais aspectos de funcionamento da CPU.
+	Possui versões em outros idiomas, incluindo espanhol.
+	Clique o link http://pacman128.github.io/pcasm/ para abrir o recurso
+
+:: Introduction to Linux Intel Assembly Language (Norm Matloff)
+	Documento introdutório sobre programação Assembly x86 no Linux
+	Clique o link http://heather.cs.ucdavis.edu/~matloff/50/LinuxAssembly.html para abrir o recurso
+
+:: x86-64 Assembly Language Programming with Ubuntu (Ed Jorgensen)
+	The purpose of this text is to provide a reference for University level assembly language and systems programming courses.  Specifically, this text addresses the x86-64 instruction set for the popular x86-64 class of processors using the Ubuntu 64-bit Operating System (OS).
+	Clique o link http://www.egr.unlv.edu/~ed/x86.html para abrir o recurso
+
+:: Assembly para o Assemblador da GNU Arquitectura Intel IA-32 (Filipe Araújo)
+	Sebenta (apostila) sobre programação Assembly para arquitetura Intel, em português de Portugal.
+	Clique o link http://eden.dei.uc.pt/~filipius/arquivo/teaching/sebenta.pdf para abrir o recurso

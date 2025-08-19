@@ -1,0 +1,22 @@
+:: Vídeos do boot manual de um DEC PDP-8 e da operação de um terminal teletipo ASR-33
+	Vídeos do boot de um DEC PDP-8 e da operação de um terminal teletipo ASR-33
+	Clique o link http://www.retrotechnology.com/pdp11/exhibit/11_video.htm para abrir o recurso
+
+:: POSIX Threads Programming
+	https://computing.llnl.gov/tutorials/pthreads/index.html
+
+:: Working Set Size Estimation
+	http://brendangregg.com/wss.html
+
+:: Travessia de uma árvore de diretórios usando recursividade (P. Domingues, C. Grilo, V. Carreira)
+	Clique o link https://www.revista-programar.info/artigos/travessia-de-uma-arvore-de-diretorios-usando-recursividade/ para abrir o recurso
+
+:: Design and Implementation of the Second Extended Filesystem
+	http://e2fsprogs.sourceforge.net/ext2intro.html
+
+:: The Second Extended File System
+	http://www.nongnu.org/ext2-doc/ext2.html
+
+:: Linux Storage Stack Diagram
+	https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram
+

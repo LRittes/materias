@@ -1,0 +1,12 @@
+• Assuntos: sistemas de arquivos, gerencia de E/S, deadlocks
+• Questoes: 
+– 2005: 52
+– 2017: 35 (CC)
+
+
+• Assuntos: fundamentos de SO, processos e threads, comunicac¸ao interprocessos
+• Questoes:
+– 2005: 11, 53
+– 2008: 19
+– 2011: 18, 29
+– 2014: 20, 21

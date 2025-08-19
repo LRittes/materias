@@ -1,0 +1,40 @@
+Hotel (cod_hotel, nome, endereco, telefone)
+
+Cliente (cod_cliente, nome, endereco, telefone)
+
+Quarto (num_quarto, andar, tipo_quarto, cod_hotel)
+
+    cod_hotel referencia Hotel
+
+Tipo_Quarto (tipo_quarto, preco_noite, cod_hotel)
+
+    cod_hotel referencia Hotel
+
+Reserva (cod_reserva, data_reserva, data_checkin_prevista, data_checkout_previsto, 
+         tipo_quarto, cama_extra, cod_cliente, cod_hotel, status)
+
+    cod_cliente referencia Cliente
+    cod_hotel referencia Hotel
+    tipo_quarto referencia Tipo_Quarto
+
+Estadia (cod_estadia, data_checkin, data_checkout, cod_cliente, num_quarto, cod_hotel)
+
+    cod_cliente referencia Cliente
+    num_quarto referencia Quarto
+    cod_hotel referencia Hotel
+
+Servico_Extra (cod_servico, descricao, preco)
+
+Servico_Estadia (cod_estadia, cod_servico, data_hora)
+
+    cod_estadia referencia Estadia
+    cod_servico referencia Servico_Extra
+
+Empregado (cod_empregado, nome)
+
+Limpeza (cod_empregado, cod_hotel, num_quarto, data)
+
+    cod_empregado referencia Empregado
+    cod_hotel referencia Hotel
+    num_quarto referencia Quarto
+
